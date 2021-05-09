@@ -1,4 +1,4 @@
-;;no, thank you
+    ;;no, thank you
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -36,27 +36,22 @@
 ;;EVIL ENV
 (use-package evil
   :straight t
+  :init
+  (setq evil-want-keybinding nil)
+  (setq evil-want-integration t)
   :config 
-  (evil-mode 1)
-  (setq evil-emacs-state-modes '(Info-mode))
-  (setq evil-motion-state-modes ())
-  (setq evil-insert-state-modes ())
-  (general-define-key
-   [remap evil-search-backward] #'helm-occur))
+  (evil-mode 1))
+
+(use-package evil-collection
+  :straight t
+  :after evil
+  :config
+  (evil-collection-init))
 
 (use-package evil-surround
   :straight t
   :config
   (global-evil-surround-mode 1))
-
-;;
-
-(use-package evil-collection
-  :straight t
-  :init
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-collection-init))
 
 ;;helm
 (use-package helm
@@ -65,7 +60,7 @@
   (general-define-key
   "M-x" #'helm-M-x
   "C-h a" #'helm-apropos
-  "M-s o" #'helm-occur
+  "M-o" #'helm-occur
   "C-x C-f" #'helm-find-files)
   (helm-mode 1))
 ;; 
