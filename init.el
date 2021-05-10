@@ -48,6 +48,16 @@
   :config
   (evil-collection-init))
 
+(use-package evil-org
+  :straight t
+  :after org
+  :config
+  (general-add-hook 'org-mode
+		    (list #'evil-org-mode))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+
 (use-package evil-surround
   :straight t
   :config
@@ -63,7 +73,7 @@
   "M-o" #'helm-occur
   "C-x C-f" #'helm-find-files)
   (helm-mode 1))
-;; 
+
 ;;File management : dired-x
 (setq find-file-visit-truename t)
 (general-add-hook 'dired-load-hook
@@ -97,7 +107,7 @@
   (setq doom-modeline-window-width-limit fill-column)
   (setq doom-modeline-icon (display-graphic-p))
   (setq doom-modeline-major-mode-icon t)
-  (setq doom-modeline-continuous-word-count-modes '(markdown-mode org-mode))
+  (setq doom-modeline-continuous-word-count-modes '(org-mode))
   (setq doom-modeline-modal-icon t)
   (setq doom-modeline-mu4e t)
   (setq doom-modeline-minor-modes (featurep 'minions))
@@ -244,18 +254,71 @@
 ;;      python-shell-prompt-detect-failure-warning nil)
 ;;(add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
 
+;;company
+(use-package company
+  :straight t
+  :config
+  (setq company-idle-delay 0.3)
+  (global-company-mode 1))
+
+(use-package company-box
+  :straight t
+  :config
+  (general-add-hook 'company-mode-hook
+		    (list 'company-box-mode)))
+
+(use-package company-lsp
+  :straight t
+  :requires company
+  :config
+  (push 'company-lsp company-backends)
+  ;;disable client side cache as LSP does is better
+  (setq company-transformers nil
+	company-lsp-async t
+	company-lsp-cache-candidates nil))
 
 
 ;; LSP
+(use-package lsp-mode
+  :straight t
+  :config
+  (setq lsp-prefer-flymake nil)
+  (general-define-key "C-M-l" (general-simulate-key "s-l")) ;; no super key
+  (general-add-hook
+   (list 'c++-mode-hook
+	 'python-mode-hook
+	 'racket-mode-hook)
+   (list #'lsp))
+  (general-add-hook
+   'lsp-mode-hook
+   (list #'lsp-enable-which-key-integration))
+  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log-error")))
 
-;;python : LSP
+(use-package lsp-racket
+  :straight '(lsp-racket
+	      :type git
+	      :host github
+	      :repo "mullikine/lsp-racket-el"))
 
+(use-package dap-mode
+  :straight t)
 
-;;C++ : LSP
-
-
-;;racket : LSP
-
+(use-package lsp-ui
+  :straight t
+  :requires lsp-mode flycheck
+  :config
+  (setq lsp-ui-doc-enable t
+	lsp-ui-doc-use-childframe t
+	lsp-ui-doc-position 'top
+	lsp-ui-doc-include-signature t
+	lsp-ui-sidline-enable t
+	lsp-ui-flycheck-list-position 'right
+	lsp-ui-flycheck-live-reporting t
+	lsp-ui-peek-enable t
+	lsp-ui-peek-enable t
+	lsp-ui-peek-list-width 60
+	lsp-ui-peek-peek-height 25)
+  (general-add-hook 'lsp-mode-hook (list 'lsp-ui-mode)))
 
 ;;Lisp add ones
 (use-package smartparens :straight t)
@@ -294,7 +357,6 @@
   (general-add-hook 'markdown-mode-hook
 		  (list 'nlinum-relative-mode)))
 
-
 ;;mail
 
 
@@ -310,7 +372,7 @@
  '(helm-completion-style 'emacs)
  '(helm-minibuffer-history-key "M-p")
  '(org-agenda-files
-   '("/mnt/c/Users/Raj Patil/source/org/gtd/events.org" "/mnt/c/Users/Raj Patil/source/org/gtd/wait.org" "/mnt/c/Users/Raj Patil/source/org/gtd/tickler.org" "/mnt/c/Users/Raj Patil/source/org/gtd/NA.org")))
+   '("/mnt/c/Users/Raj Patil/source/org/gtd/projects.org" "/mnt/c/Users/Raj Patil/source/org/gtd/events.org" "/mnt/c/Users/Raj Patil/source/org/gtd/wait.org" "/mnt/c/Users/Raj Patil/source/org/gtd/tickler.org" "/mnt/c/Users/Raj Patil/source/org/gtd/NA.org")))
    
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
