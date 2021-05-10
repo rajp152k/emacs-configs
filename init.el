@@ -1,8 +1,7 @@
-    ;;no, thank you
+;;no, thank you
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-
 
 ;;Bootstrapping straight.el
 (defvar bootstrap-version)
@@ -31,7 +30,8 @@
 (use-package dashboard
   :straight t
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  (setq dashboard-center-content t))
 
 ;;EVIL ENV
 (use-package evil
@@ -259,6 +259,7 @@
   :straight t
   :config
   (setq company-idle-delay 0.3)
+  (setq company-backends (cons #'company-capf company-backends))
   (global-company-mode 1))
 
 (use-package company-box
