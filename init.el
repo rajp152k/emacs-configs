@@ -217,43 +217,6 @@
  :prefix "C-c"
  "g" #'gtd)
 
-
-;;org-roam
-
-(use-package org-roam
-  :straight t
-  :config
-  (setq org-roam-directory "~/links/source/org/org-roam")
-  (general-define-key
-   :prefix "C-c"
-   "n l" 'org-roam
-   "n f" 'org-roam-find-file
-   "n g" 'org-roam-graph
-   "n i" 'org-roam-insert
-   "n I" 'org-roam-insert-immediate)
-  (executable-find "sqlite3")
-  (add-hook 'after-init-hook 'org-roam-mode)
-  (setq org-roam-tag-sources '(prop vanilla all-directories))
-  (setq org-roam-buffer-position 'right)
-  ;;(setq org-roam-buffer-width )
-  (setq org-roam-buffer-window-parameters
-	'((no-delete-other-windows . t))))
-
-;;python : elpy
-;;(straight-use-package 'elpy)
-;;(straight-use-package 'flycheck)
-;;(straight-use-package 'ein)
-;;(elpy-enable)
-;;(general-add-hook 'elpy-mode-hook
-;;		  (list #'flycheck-mode))
-;;(setq conda-base "/home/rajp152k/miniconda3")
-;;(setenv "WORKON_HOME" "/home/rajp152k/miniconda3/envs")
-;;(pyvenv-activate conda-base)
-;;(setq python-shell-interpreter "jupyter"
-;;      python-shell-interpreter-args "console --simple-prompt"
-;;      python-shell-prompt-detect-failure-warning nil)
-;;(add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
-
 ;;company
 (use-package company
   :straight t
