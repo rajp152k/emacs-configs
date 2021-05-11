@@ -150,14 +150,14 @@
  :prefix "C-c"
  "e" #'edit-init)
 
-					;TABS
-
-(use-package workgroups2
+					;Winner mode
+(use-package winner
   :straight t
   :config
-  (setq wg-session-load-on-start nil)
-  (setq wg-session-file "~/.emacs.d/.emacs_workgroups"))
-
+  (winner-mode 1)
+  (general-define-key
+   "<C-M-left>" #'winner-undo
+   "<C-M-right>" #'winner-redo))
 
 					;ACE-JUMP
 
