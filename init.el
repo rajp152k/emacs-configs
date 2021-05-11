@@ -3,6 +3,9 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
+;;cl warnings
+(setq byte-compile-warnings '(cl-functions))
+
 ;;Bootstrapping straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -152,7 +155,7 @@
   :straight t
   :config
   (general-define-key
-   "M-j" 'ace-jump-mode))
+   "C-M-j" 'ace-jump-mode))
 
 
 ;;which-key
@@ -186,7 +189,7 @@
    "a" #'org-agenda
    "c" #'org-capture)
   (setq org-directory "~/links/source/org")
-  (setq org-default-notes-file (concat org-directory "/capture.org"))
+  (setq org-default-notes-file (concat org-directory "/gtd/GTD_HQ.org"))
   (setq org-startup-with-inline-images t)
   (setq org-startup-truncated nil)
   (general-add-hook 'org-mode-hook
@@ -204,12 +207,29 @@
    :prefix "C-c C-x"
    "C-g" 'org-clock-goto))
 
+(defun +org/opened-buffer-files ()
+  "Return the list of files currently opened in emacs"
+  (delq nil
+        (mapcar (lambda (x)
+                  (if (and (buffer-file-name x)
+                           (string-match "\\.org$"
+                                         (buffer-file-name x)))
+                      (buffer-file-name x)))
+                (buffer-list))))
+
+(setq org-refile-targets '((+org/opened-buffer-files :maxlevel . 10)))
+
+(setq org-capture-templates
+      '(("n" "Next Action" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "NA")
+         "* TODO %?\n  %i\n  %a")
+        ("i" "IN" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "INQ")
+         "* %?\nEntered on %U\n  %i\n  %a")))
 
 ;;GTD
 (defun gtd()
   "open the GTD workspace"
   (interactive)
-  (let ((gtd-dir (concat org-directory "/gtd")))
+  (let ((gtd-dir (concat org-directory "/gtd/GTD_HQ.org")))
     (message (concat "opening GTD workspace @ " gtd-dir))
     (find-file gtd-dir)))
 
@@ -336,7 +356,7 @@
  '(helm-completion-style 'emacs)
  '(helm-minibuffer-history-key "M-p")
  '(org-agenda-files
-   '("/mnt/c/Users/Raj Patil/source/org/gtd/projects.org" "/mnt/c/Users/Raj Patil/source/org/gtd/events.org" "/mnt/c/Users/Raj Patil/source/org/gtd/wait.org" "/mnt/c/Users/Raj Patil/source/org/gtd/tickler.org" "/mnt/c/Users/Raj Patil/source/org/gtd/NA.org")))
+   '("/mnt/c/Users/Raj Patil/source/org/gtd/GTD_HQ.org" "/mnt/c/Users/Raj Patil/source/org/gtd/events.org")))
    
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
