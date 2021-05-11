@@ -1,12 +1,15 @@
+;;fonts
 ;;no, thank you
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-;;cl warnings
+					;CL WARNINGS
+
 (setq byte-compile-warnings '(cl-functions))
 
-;;Bootstrapping straight.el
+					;BOOTSTRAPPING STRAIGHT.EL
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -24,19 +27,22 @@
 (setq straight-path "~/.emacs.d/straight/")
 
 
-;;General
+					;GENERAL
+
 (use-package general
   :straight t)
 
 
-;;dashboard
+					;DASHBOARD
+
 (use-package dashboard
   :straight t
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t))
 
-;;EVIL ENV
+					;EVIL ENV
+
 (use-package evil
   :straight t
   :init
@@ -66,7 +72,8 @@
   :config
   (global-evil-surround-mode 1))
 
-;;helm
+					;HELM
+
 (use-package helm
   :straight t
   :config
@@ -77,7 +84,8 @@
   "C-x C-f" #'helm-find-files)
   (helm-mode 1))
 
-;;File management : dired-x
+					;FILE MANAGEMENT : DIRED-X
+
 (setq find-file-visit-truename t)
 (general-add-hook 'dired-load-hook
 		(list (lambda ()
@@ -87,10 +95,12 @@
 			;; (setq dired-x-hands-off-my-keys nil)
 			)))
 
-;;; Tramp
+					; TRAMP
+
 (setq tramp-default-method "ssh")
 
-;;Aesthetics
+					;AESTHETICS
+
 (use-package doom-themes
   :straight t
   :config
@@ -98,7 +108,8 @@
 (use-package darkroom
   :straight t)
 
-;;modeline and icons
+					;MODELINE AND ICONS
+
 (use-package doom-modeline
   :straight t
   :init
@@ -119,7 +130,6 @@
 			  #'minions-mode)))
 
   
-;;Meta
 (use-package nlinum-relative
   :straight t
   :config
@@ -130,7 +140,8 @@
   (setq nlinum-relative-current-symbol "->")      
   (setq nlinum-relative-offset 0)) 
 
-;;quick config
+					;QUICK CONFIG
+
 (defun edit-init ()
   (interactive)
   (message (concat "editing user-init-file @ " user-init-file))
@@ -139,18 +150,17 @@
  :prefix "C-c"
  "e" #'edit-init)
 
-;;tabs
+					;TABS
+
 (use-package workgroups2
   :straight t
   :config
   (setq wg-session-load-on-start nil)
   (setq wg-session-file "~/.emacs.d/.emacs_workgroups"))
 
-;;clip interop
-;; use S-insert for pasting from external clip
-;; evil-yank interop is fine and C-v works as expected in host OS
 
-;;ace-jump
+					;ACE-JUMP
+
 (use-package ace-jump-mode
   :straight t
   :config
@@ -158,7 +168,8 @@
    "C-M-j" 'ace-jump-mode))
 
 
-;;which-key
+					;WHICH-KEY
+
 (use-package which-key
   :straight t
   :config
@@ -171,16 +182,19 @@
 (general-define-key
  "C-c t" #'toggle-truncate-lines)
 
-;;PDF interop
+					;PDF INTEROP
+
 (use-package pdf-tools
   :straight t
   :config
   (pdf-loader-install))
 
-;;magit
+					;MAGIT
+
 (use-package magit :straight t)
 
-;;org-ops
+					;ORG-OPS
+
 (use-package org
   :straight t
   :config
@@ -207,6 +221,7 @@
   (general-define-key
    :prefix "C-c C-x"
    "C-g" 'org-clock-goto))
+
 
 (defun +org/opened-buffer-files ()
   "Return the list of files currently opened in emacs"
@@ -321,7 +336,8 @@
 	company-lsp-cache-candidates nil))
 
 
-;; LSP
+					; LSP
+
 (use-package lsp-mode
   :straight t
   :config
@@ -363,11 +379,13 @@
 	lsp-ui-peek-peek-height 25)
   (general-add-hook 'lsp-mode-hook (list 'lsp-ui-mode)))
 
-;;Lisp add ones
+					;LISP ADD ONES
+
 (use-package smartparens :straight t)
 (use-package rainbow-delimiters :straight t)
 
-;;racket
+					;RACKET
+
 (use-package racket-mode
   :straight t
   :config
@@ -375,14 +393,15 @@
 	  	  (list 'smartparens-mode ;;use (kbd `C-q '`) for single quoting
 			'rainbow-delimiters-mode)))
 
-;;eshell
 
-;;elisp
+					;ELISP
+
 (general-add-hook 'emacs-lisp-mode-hook
 		  (list 'smartparens-mode ;;use (kbd `C-c '`) for single quoting
 			'rainbow-delimiters-mode))
 
-;;blog
+					;BLOG
+
 (defun blog ()
   "Open blogging workspace"
   (interactive)
@@ -393,14 +412,16 @@
 (general-define-key
  "C-c b" 'blog)
 
-;;markdown
+					;MARKDOWN
+
 (use-package markdown-mode
   :straight t
   :config 
   (general-add-hook 'markdown-mode-hook
 		  (list 'nlinum-relative-mode)))
 
-;;mail
+					;MAIL
+
 
 
 ;;self appends
