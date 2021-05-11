@@ -165,8 +165,9 @@
   (which-key-mode)
   (which-key-setup-side-window-bottom))
 
-;;eww
-(setq browse-url-browser-function 'eww-browse-url)
+;;browsing
+;;(setq browse-url-browser-function 'eww-browse-url)
+(setq browse-url-generic-program "/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe")
 (general-define-key
  "C-c t" #'toggle-truncate-lines)
 
@@ -236,6 +237,7 @@
 (general-define-key
  :prefix "C-c"
  "g" #'gtd)
+
 
 
 ;;org-roam
