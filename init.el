@@ -285,7 +285,9 @@
    "n f" 'org-roam-find-file
    "n g" 'org-roam-graph
    "n i" 'org-roam-insert
-   "n I" 'org-roam-insert-immediate)
+   "n I" 'org-roam-insert-immediate
+   "n b" 'org-roam-db-build-cache
+   "n r" 'org-roam-buffer-toggle-display)
   (executable-find "sqlite3")
   (add-hook 'after-init-hook 'org-roam-mode)
   (setq org-roam-tag-sources '(prop vanilla all-directories))
