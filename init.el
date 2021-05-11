@@ -237,6 +237,27 @@
  :prefix "C-c"
  "g" #'gtd)
 
+
+;;org-roam
+
+(use-package org-roam
+  :straight t
+  :config
+  (setq org-roam-directory "~/links/source/org/org-roam")
+  (general-define-key
+   :prefix "C-c"
+   "n l" 'org-roam
+   "n f" 'org-roam-find-file
+   "n g" 'org-roam-graph
+   "n i" 'org-roam-insert
+   "n I" 'org-roam-insert-immediate)
+  (executable-find "sqlite3")
+  (add-hook 'after-init-hook 'org-roam-mode)
+  (setq org-roam-tag-sources '(prop vanilla all-directories))
+  (setq org-roam-buffer-position 'right)
+  ;;(setq org-roam-buffer-width )
+  (setq org-roam-buffer-window-parameters
+	'((no-delete-other-windows . t))))
 ;;company
 (use-package company
   :straight t
