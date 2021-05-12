@@ -285,17 +285,21 @@
   :config
   (setq org-roam-directory "~/links/source/org/org-roam")
   (general-define-key
-   :prefix "C-c"
-   "n l" 'org-roam
-   "n f" 'org-roam-find-file
-   "n g" 'org-roam-graph
-   "n i" 'org-roam-insert
-   "n I" 'org-roam-insert-immediate
-   "n b" 'org-roam-db-build-cache
-   "n r" 'org-roam-buffer-toggle-display)
+   :prefix "C-c n"
+   "l" #'org-roam
+   "f" #'org-roam-find-file
+   "g" #'org-roam-graph
+   "i" #'org-roam-insert
+   "I" #'org-roam-insert-immediate
+   "c" #'org-roam-capture
+   "r" #'org-roam-buffer-toggle-display)
   (executable-find "sqlite3")
-  (add-hook 'after-init-hook 'org-roam-mode)
+  (general-add-hook 'after-init-hook 'org-roam-mode)
+  (setq org-roam-index-file
+	(concat org-roam-directory "/Index.org"))
+  (setq org-roam-db-update-method 'immediate)
   (setq org-roam-tag-sources '(prop vanilla all-directories))
+  (setq org-roam-link-use-custom-faces 'everywhere)
   (setq org-roam-buffer-position 'right)
   (setq org-roam-buffer-window-parameters
 	'((no-delete-other-windows . t))))
