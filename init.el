@@ -326,7 +326,7 @@
   :after org-roam
   :hook (org-roam-mode . org-roam-bibtex-mode)
   :config
-  (general-add-hook 'org-roam-mode 'org-roam-bibtex-mode
+  (general-add-hook 'org-roam-mode 'org-roam-bibtex-mode)
   (require 'org-ref)) ; optional: if Org Ref is not loaded anywhere else, load it here
 
 					;COMPANY
