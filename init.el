@@ -1,4 +1,4 @@
-;;fonts
+(set-frame-font "CaskaydiaCove NF" nil t)
 ;;no, thank you
 (menu-bar-mode -1)
 (tool-bar-mode -1)
