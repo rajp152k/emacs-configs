@@ -222,6 +222,11 @@
    :prefix "C-c C-x"
    "C-g" 'org-clock-goto))
 
+(use-package org-bullets
+  :straight t
+  :config
+  (general-add-hook
+   'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (defun +org/opened-buffer-files ()
   "Return the list of files currently opened in emacs"
