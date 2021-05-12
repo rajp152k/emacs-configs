@@ -321,13 +321,20 @@
         org-roam-server-network-label-truncate-length 60
         org-roam-server-network-label-wrap-length 20))
 
+(use-package org-roam-bibtex
+  :straight t 
+  :after org-roam
+  :hook (org-roam-mode . org-roam-bibtex-mode)
+  :config
+  (general-add-hook 'org-roam-mode 'org-roam-bibtex-mode
+  (require 'org-ref)) ; optional: if Org Ref is not loaded anywhere else, load it here
+
 					;COMPANY
 
 (use-package company
   :straight t
   :config
   (setq company-idle-delay 0.3)
-  (setq company-backends (cons #'company-capf company-backends))
   (global-company-mode 1))
 
 (use-package company-box
