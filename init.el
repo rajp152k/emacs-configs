@@ -419,6 +419,16 @@
 (general-define-key
  "C-c b" 'blog)
 
+					;DICTIONARY
+(use-package define-word
+  :straight t
+  :config
+  (general-define-key
+   :prefix "C-c"
+   "d" #'define-word-at-point
+   "D" #'define-word))
+
+
 					;MARKDOWN
 
 (use-package markdown-mode
