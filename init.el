@@ -309,6 +309,7 @@
   (setq org-roam-tag-sources '(prop vanilla all-directories))
   (setq org-roam-link-use-custom-faces 'everywhere)
   (setq org-roam-buffer-position 'right)
+  (setq org-roam-auto-replace-fuzzy-links nil)
   (setq org-roam-buffer-window-parameters
 	'((no-delete-other-windows . t))))
 
@@ -329,6 +330,10 @@
         org-roam-server-network-label-truncate-length 60
         org-roam-server-network-label-wrap-length 20))
 
+
+					;ORG-ROAM-COMPLETION
+
+
 (use-package org-roam-bibtex
   :straight t 
   :after org-roam
@@ -342,7 +347,10 @@
 (use-package company
   :straight t
   :config
-  (setq company-idle-delay 0.3)
+  (setq company-idle-delay 0.2)
+  (setq company-minimum-prefix-length 2)
+  (add-to-list 'company-backends 'company-capf)
+  (setq company-ignore-case t)
   (global-company-mode 1))
 
 (use-package company-box
