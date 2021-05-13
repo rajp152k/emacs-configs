@@ -225,8 +225,9 @@
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
   (general-define-key
-   :prefix "C-c C-x"
-   "C-g" 'org-clock-goto))
+   :prefix "C-c"
+   "r" #'org-refile
+   "C-x C-g" #'org-clock-goto))
 
 (use-package org-bullets
   :straight t
@@ -244,7 +245,7 @@
                       (buffer-file-name x)))
                 (buffer-list))))
 
-(setq org-refile-targets '((+org/opened-buffer-files :maxlevel . 10)))
+(setq org-refile-targets '((+org/opened-buffer-files :maxlevel . 3)))
 
 (setq org-capture-templates
       '(("n" "Next Action" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "NA")
