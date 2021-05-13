@@ -290,7 +290,7 @@
 (use-package org-roam
   :straight t
   :config
-  (setq org-roam-directory "~/links/source/org/org-roam")
+  (setq org-roam-directory "/mnt/c/Users/Raj Patil/source/org/org-roam/")
   (general-define-key
    :prefix "C-c n"
    "l" #'org-roam
