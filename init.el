@@ -415,7 +415,8 @@
   :config
   (general-add-hook 'racket-mode-hook
 	  	  (list 'smartparens-mode ;;use (kbd `C-q '`) for single quoting
-			'rainbow-delimiters-mode)))
+			'rainbow-delimiters-mode
+			'racket-run)))
 
 
 					;ELISP
