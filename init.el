@@ -407,7 +407,10 @@
 
 					;LISP ADD ONES
 
-(use-package smartparens :straight t)
+(use-package smartparens
+  :straight t
+  :config
+  (smartparens-global-mode t))
 (use-package rainbow-delimiters :straight t)
 
 					;RACKET
@@ -416,8 +419,7 @@
   :straight t
   :config
   (general-add-hook 'racket-mode-hook
-	  	  (list 'smartparens-mode ;;use (kbd `C-q '`) for single quoting
-			'rainbow-delimiters-mode
+	  	  (list 'rainbow-delimiters-mode
 			'racket-run)))
 
 
