@@ -159,6 +159,12 @@
    "<C-M-left>" #'winner-undo
    "<C-M-right>" #'winner-redo))
 
+					;Tabs
+(use-package eyebrowse
+  :straight t
+  :config
+  (eyebrowse-mode t))
+
 					;ACE-JUMP
 
 (use-package ace-jump-mode
