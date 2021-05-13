@@ -296,6 +296,8 @@
    "l" #'org-roam
    "f" #'org-roam-find-file
    "g" #'org-roam-graph
+   "t" #'org-roam-tag-add
+   "d" #'org-roam-tag-delete
    "i" #'org-roam-insert
    "I" #'org-roam-insert-immediate
    "b" #'org-roam-db-build-cache
