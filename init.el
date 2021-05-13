@@ -186,8 +186,8 @@
   (which-key-setup-side-window-bottom))
 
 ;;browsing
-;;(setq browse-url-browser-function 'eww-browse-url)
-(setq browse-url-generic-program "/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe")
+(setq browse-url-browser-function 'eww-browse-url)
+(setq shr-max-image-proportion 0.6)
 (general-define-key
  "C-c t" #'toggle-truncate-lines)
 
