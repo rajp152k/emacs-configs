@@ -258,6 +258,8 @@
 (setq org-capture-templates
       '(("n" "Next Action" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "NA")
          "* TODO %?\n  %i\n  %a")
+	("e" "Event" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "INQ")
+         "* %?\nSCHEDULED: %T\n  %i")
         ("i" "IN" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "INQ")
          "* %?\nEntered on %U\n  %i\n  %a")))
 
