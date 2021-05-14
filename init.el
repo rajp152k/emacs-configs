@@ -39,15 +39,20 @@
   :straight t
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-center-content t))
+  (setq
+   initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
+   dashboard-center-content t
+   dashboard-startup-banner 'logo
+   ))
 
 					;EVIL ENV
 
 (use-package evil
   :straight t
   :init
-  (setq evil-want-keybinding nil)
-  (setq evil-want-integration t)
+  (setq
+   evil-want-keybinding nil
+   evil-want-integration t)
   :config 
   (evil-mode 1))
 
