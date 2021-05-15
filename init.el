@@ -221,10 +221,10 @@
    "l" #'org-store-link
    "a" #'org-agenda
    "c" #'org-capture)
-  (setq org-directory "~/links/source/org")
-  (setq org-default-notes-file (concat org-directory "/gtd/GTD_HQ.org"))
-  (setq org-startup-with-inline-images t)
-  (setq org-startup-truncated nil)
+  (setq org-directory (file-truename "~/links/source/org")
+	org-default-notes-file (concat org-directory "/gtd/GTD_HQ.org")
+	org-startup-with-inline-images t
+	org-startup-truncated nil)
   (general-add-hook 'org-mode-hook
 		    (list #'toggle-word-wrap
 			  #'nlinum-relative-mode))
@@ -304,7 +304,7 @@
 (use-package org-roam
   :straight t
   :config
-  (setq org-roam-directory "/mnt/c/Users/Raj Patil/source/org/org-roam/")
+  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/org-roam/"))
   (general-define-key
    :prefix "C-c n"
    "l" #'org-roam
