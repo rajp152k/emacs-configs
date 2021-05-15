@@ -442,7 +442,7 @@
 	lsp-ui-peek-peek-height 25)
   (general-add-hook 'lsp-mode-hook (list 'lsp-ui-mode)))
 
-					;LISP ADD ONES
+					;LISP ADD ONS
 
 (use-package smartparens
   :straight t
