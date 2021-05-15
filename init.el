@@ -172,8 +172,8 @@
   :straight t
   :config
   (general-define-key
-   "M-<left>" #'eyebrowse-prev-window-config
-   "M-<right>" #'eyebrowse-next-window-config)
+   "M-S-<left>" #'eyebrowse-prev-window-config
+   "M-S-<right>" #'eyebrowse-next-window-config)
   (eyebrowse-mode t))
 
 					;ACE-JUMP
@@ -191,6 +191,7 @@
   :straight t
   :config
   (which-key-mode)
+  (general-define-key "C-h C-k" #'which-key-show-top-level)
   (which-key-setup-side-window-bottom))
 
 ;;browsing
@@ -333,6 +334,8 @@
 (use-package org-roam-server
   :straight t
   :config
+  (general-define-key
+   "C-c n s" #'org-roam-server-mode)
   (setq org-roam-server-host "127.0.0.1"
         org-roam-server-port 8081
         org-roam-server-authenticate nil
