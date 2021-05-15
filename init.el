@@ -58,11 +58,20 @@
 (use-package evil
   :straight t
   :init
+  (use-package undo-fu
+    :straight t
+    :config
+    (general-define-key
+     :states 'normal
+     "u" #'undo-fu-only-undo
+     "\C-r" #'undo-fu-only-redo)
+    (setq evil-undo-system 'undo-fu))
   (setq
    evil-want-keybinding nil
    evil-want-integration t)
   :config 
   (evil-mode 1))
+
 
 (use-package evil-collection
   :straight t
