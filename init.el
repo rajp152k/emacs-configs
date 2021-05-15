@@ -1,4 +1,10 @@
+
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 (set-frame-font "CaskaydiaCove NF" nil t)
+
 ;;no, thank you
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -39,6 +45,8 @@
   :straight t
   :config
   (dashboard-setup-startup-hook)
+  (general-define-key
+   "C-c h" (lambda () (interactive)(view-buffer "*dashboard*")))
   (setq
    initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
    dashboard-center-content t
@@ -270,19 +278,6 @@
 
 
 
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-;(use-package org-protocol
-;  :straight t
-;  :config
-;  (add-to-list 'org-capture-templates
-;               '("p" "Protocol" entry (file "")
-;                 "* %?[[%:link][%:description]] %U\n%i\n" :prepend t))
-;  (add-to-list 'org-capture-templates
-;               '("L" "Protocol Link" entry (file "")
-;                 "* %?[[%:link][%:description]] %U\n" :prepend t)))
-
 					;GTD
 
 (defun gtd()
@@ -499,7 +494,8 @@
  '(helm-completion-style 'emacs)
  '(helm-minibuffer-history-key "M-p")
  '(org-agenda-files
-   '("/mnt/c/Users/Raj Patil/source/org/gtd/GTD_HQ.org" "/mnt/c/Users/Raj Patil/source/org/gtd/events.org")))
+   '("/mnt/c/Users/Raj Patil/source/org/gtd/GTD_base.org" "/mnt/c/Users/Raj Patil/source/org/gtd/GTD_HQ.org" "/mnt/c/Users/Raj Patil/source/org/gtd/events.org"))
+ '(warning-suppress-types '((comp))))
    
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
