@@ -124,6 +124,15 @@
 				   vc-ignore-dir-regexp
 				   tramp-file-name-regexp)
       tramp-verbose 1)
+
+(defun gpu_dgx_50.93 ()
+    "ssh into the .50.93 DGX station"
+  (interactive)
+  (find-file "/ssh:cs18btech11039@192.168.50.93:/home/cs18btech11039"))
+
+(general-define-key
+ "C-c C-r C-a" #'gpu_dgx_50.93)
+
 					;AESTHETICS
 
 (use-package doom-themes
