@@ -102,8 +102,11 @@
 
 					; TRAMP
 
-(setq tramp-default-method "ssh")
-
+(setq tramp-default-method "ssh"
+      vc-ignore-dir-regexp (format "%s\\|%s"
+				   vc-ignore-dir-regexp
+				   tramp-file-name-regexp)
+      tramp-verbose 1)
 					;AESTHETICS
 
 (use-package doom-themes
