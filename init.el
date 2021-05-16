@@ -404,6 +404,11 @@
    (list #'lsp-enable-which-key-integration))
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log-error")))
 
+(use-package lsp-pyright
+  :straight t
+  :config
+  (general-add-hook 'python-mode #'(lambda () (lsp)) ))
+
 (use-package lsp-racket
   :straight '(lsp-racket
 	      :type git
@@ -429,6 +434,35 @@
 	lsp-ui-peek-list-width 60
 	lsp-ui-peek-peek-height 25)
   (general-add-hook 'lsp-mode-hook (list 'lsp-ui-mode)))
+
+					; remote ops
+
+(use-package tramp
+  :straight t
+  :config
+
+  (setq tramp-default-method "ssh"
+	vc-ignore-dir-regexp (format "%s\\|%s"
+				     vc-ignore-dir-regexp
+				     tramp-file-name-regexp)
+	tramp-verbose 6)
+
+  (defun gpu_dgx_50.93 ()
+    "ssh into the .50.93 DGX station"
+    (interactive)
+    (add-to-list 'tramp-remote-path "/raid/cs18btech11039/anaconda3/bin")
+    (find-file "/ssh:cs18btech11039@192.168.50.93:/home/cs18btech11039"))
+
+  ;;remote python lsp tramp
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-tramp-connection "pyls")
+		    :major-modes '(python-mode)
+		    :remote? t
+		    :server-id 'pyls-remote))
+
+
+  (general-define-key
+   "C-c C-r C-a" #'gpu_dgx_50.93))
 
 					;LISP ADD ONS
 
