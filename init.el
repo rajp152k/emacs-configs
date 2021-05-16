@@ -404,10 +404,10 @@
    (list #'lsp-enable-which-key-integration))
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log-error")))
 
-(use-package lsp-pyright
-  :straight t
-  :config
-  (general-add-hook 'python-mode #'(lambda () (lsp)) ))
+;(use-package lsp-pyright
+;  :straight t
+;  :config
+;  (general-add-hook 'python-mode #'(lambda () (lsp)) ))
 
 (use-package lsp-racket
   :straight '(lsp-racket
