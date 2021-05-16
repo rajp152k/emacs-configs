@@ -100,47 +100,33 @@
   :straight t
   :config
   (general-define-key
-  "M-x" #'helm-M-x
-  "C-h a" #'helm-apropos
-  "M-o" #'helm-occur
-  "C-x C-f" #'helm-find-files)
+   "M-x" #'helm-M-x
+   "C-h a" #'helm-apropos
+   "M-o" #'helm-occur
+   "C-x C-f" #'helm-find-files)
   (helm-mode 1))
 
 					;FILE MANAGEMENT : DIRED-X
 
 (setq find-file-visit-truename t)
 (general-add-hook 'dired-load-hook
-		(list (lambda ()
-			(load "dired-x")
-			;; Set dired-x global variables here.  For example:
-			;; (setq dired-guess-shell-gnutar "gtar")
-			;; (setq dired-x-hands-off-my-keys nil)
-			)))
-
-					; TRAMP
-
-(setq tramp-default-method "ssh"
-      vc-ignore-dir-regexp (format "%s\\|%s"
-				   vc-ignore-dir-regexp
-				   tramp-file-name-regexp)
-      tramp-verbose 1)
-
-(defun gpu_dgx_50.93 ()
-    "ssh into the .50.93 DGX station"
-  (interactive)
-  (find-file "/ssh:cs18btech11039@192.168.50.93:/home/cs18btech11039"))
-
-(general-define-key
- "C-c C-r C-a" #'gpu_dgx_50.93)
+		  (list (lambda ()
+			  (load "dired-x")
+			  ;; Set dired-x global variables here.  For example:
+			  ;; (setq dired-guess-shell-gnutar "gtar")
+			  ;; (setq dired-x-hands-off-my-keys nil)
+			  )))
 
 					;AESTHETICS
 
 (use-package doom-themes
-  :straight t
-  :config
-  (load-theme 'doom-nord))
+  :straight t)
 (use-package darkroom
   :straight t)
+(use-package nimbus-theme
+  :straight t
+  :config
+  (load-theme 'nimbus t))
 
 					;MODELINE AND ICONS
 
@@ -259,7 +245,7 @@
     (plist-put org-format-latex-options :scale (* 1.5 text-scale-mode-amount))
     (org-latex-preview '(16)))
   (general-add-hook 'text-scale-mode-hook
-		  (list #'update-org-latex-fragments))
+		    (list #'update-org-latex-fragments))
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
   (general-define-key
@@ -463,7 +449,7 @@
 					;ELISP
 
 (general-add-hook 'emacs-lisp-mode-hook
-		  (list 'smartparens-mode ;;use (kbd `C-c '`) for single quoting
+		  (list 'smartparens-mode ;;use (kbd `C-q '`) for single quoting
 			'rainbow-delimiters-mode))
 
 					;BLOG
