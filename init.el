@@ -277,7 +277,9 @@
 	("e" "Event" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "INQ")
          "* %?\nSCHEDULED: %T\n  %i")
         ("i" "IN" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "INQ")
-         "* %?\nEntered on %U\n  %i\n  %a")))
+         "* %?\nEntered on %U\n  %i\n  %a")
+	("t" "Tickler" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "Tickler")
+	 "* %?\nDEFER THOUGHT TO: %T\n %i"))) 
 
 
 
