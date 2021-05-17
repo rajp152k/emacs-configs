@@ -324,37 +324,9 @@
 		  (display-buffer-in-side-window)
 		  (window-width . 0.25)
 		  (side . left)
-		  (slot 0))))
-  )
+		  (slot 0)))))
 
-;(use-package org-roam
-;  :straight t
-;  :config
-;  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/org-roam/"))
-;  (general-define-key
-;   :prefix "C-c n"
-;   "l" #'org-roam
-;   "f" #'org-roam-find-file
-;   "g" #'org-roam-graph
-;   "t" #'org-roam-tag-add
-;   "d" #'org-roam-tag-delete
-;   "i" #'org-roam-insert
-;   "I" #'org-roam-insert-immediate
-;   "b" #'org-roam-db-build-cache
-;   "c" #'org-roam-capture
-;   "r" #'org-roam-buffer-toggle-display)
-;  (executable-find "sqlite3")
-;  (general-add-hook 'after-init-hook 'org-roam-mode)
-;  (setq org-roam-index-file
-;	(concat org-roam-directory "/Index.org"))
-;  (setq org-roam-db-update-method 'immediate)
-;  (setq org-roam-tag-sources '(prop vanilla all-directories))
-;  (setq org-roam-link-use-custom-faces 'everywhere)
-;  (setq org-roam-buffer-position 'right)
-;  (setq org-roam-auto-replace-fuzzy-links nil)
-;  (setq org-roam-buffer-window-parameters
-;	'((no-delete-other-windows . t))))
-;
+
 ;(require 'org-roam-protocol)
 
 ;(use-package org-roam-server
