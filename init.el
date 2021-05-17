@@ -33,10 +33,13 @@
 (setq straight-path "~/.emacs.d/straight/")
 
 
-					;GENERAL
+					;GENERAL + binding free ups
 
 (use-package general
-  :straight t)
+  :straight t
+  :config
+  (general-unbind "C-M-n" ; free up for org-roam *Notes*
+    ))
 
 
 					;DASHBOARD
