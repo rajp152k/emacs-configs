@@ -311,6 +311,7 @@
 		     :repo "org-roam/org-roam"
 		     :branch "v2")
   :config
+  (setq org-id-method 'ts)
   (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/org-roam/"))
   (setq org-roam-file-extensions '("org"))
   (org-roam-setup)
