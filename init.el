@@ -300,6 +300,33 @@
 					;ORG-ROAM
 
 
+(use-package org-roam
+  :straight (org-roam :host github
+		     :repo "org-roam/org-roam"
+		     :branch "v2")
+  :config
+  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/org-roam/"))
+  (setq org-roam-file-extensions '("org"))
+  (org-roam-setup)
+  (general-define-key
+   :prefix "C-M-n"
+   "f" #'org-roam-node-find
+   "i" #'org-roam-node-insert
+   "c" #'org-roam-capture
+   "d s" #'org-roam-db-sync
+   "t a" #'org-roam-tag-add
+   "o" #'org-open-at-point-global
+   "t d" #'org-roam-tag-remove
+   "r" #'org-roam-buffer-toggle)
+  (add-to-list 'display-buffer-alist
+	       '(; org-roam buffer toggle config
+		 (".org-roam.*"
+		  (display-buffer-in-side-window)
+		  (window-width . 0.25)
+		  (side . left)
+		  (slot 0))))
+  )
+
 ;(use-package org-roam
 ;  :straight t
 ;  :config
