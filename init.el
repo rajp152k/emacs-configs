@@ -300,52 +300,52 @@
 					;ORG-ROAM
 
 
-(use-package org-roam
-  :straight t
-  :config
-  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/org-roam/"))
-  (general-define-key
-   :prefix "C-c n"
-   "l" #'org-roam
-   "f" #'org-roam-find-file
-   "g" #'org-roam-graph
-   "t" #'org-roam-tag-add
-   "d" #'org-roam-tag-delete
-   "i" #'org-roam-insert
-   "I" #'org-roam-insert-immediate
-   "b" #'org-roam-db-build-cache
-   "c" #'org-roam-capture
-   "r" #'org-roam-buffer-toggle-display)
-  (executable-find "sqlite3")
-  (general-add-hook 'after-init-hook 'org-roam-mode)
-  (setq org-roam-index-file
-	(concat org-roam-directory "/Index.org"))
-  (setq org-roam-db-update-method 'immediate)
-  (setq org-roam-tag-sources '(prop vanilla all-directories))
-  (setq org-roam-link-use-custom-faces 'everywhere)
-  (setq org-roam-buffer-position 'right)
-  (setq org-roam-auto-replace-fuzzy-links nil)
-  (setq org-roam-buffer-window-parameters
-	'((no-delete-other-windows . t))))
+;(use-package org-roam
+;  :straight t
+;  :config
+;  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/org-roam/"))
+;  (general-define-key
+;   :prefix "C-c n"
+;   "l" #'org-roam
+;   "f" #'org-roam-find-file
+;   "g" #'org-roam-graph
+;   "t" #'org-roam-tag-add
+;   "d" #'org-roam-tag-delete
+;   "i" #'org-roam-insert
+;   "I" #'org-roam-insert-immediate
+;   "b" #'org-roam-db-build-cache
+;   "c" #'org-roam-capture
+;   "r" #'org-roam-buffer-toggle-display)
+;  (executable-find "sqlite3")
+;  (general-add-hook 'after-init-hook 'org-roam-mode)
+;  (setq org-roam-index-file
+;	(concat org-roam-directory "/Index.org"))
+;  (setq org-roam-db-update-method 'immediate)
+;  (setq org-roam-tag-sources '(prop vanilla all-directories))
+;  (setq org-roam-link-use-custom-faces 'everywhere)
+;  (setq org-roam-buffer-position 'right)
+;  (setq org-roam-auto-replace-fuzzy-links nil)
+;  (setq org-roam-buffer-window-parameters
+;	'((no-delete-other-windows . t))))
+;
+;(require 'org-roam-protocol)
 
-(require 'org-roam-protocol)
-
-(use-package org-roam-server
-  :straight t
-  :config
-  (general-define-key
-   "C-c n s" #'org-roam-server-mode)
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8081
-        org-roam-server-authenticate nil
-        org-roam-server-export-inline-images t
-        org-roam-server-serve-files nil
-        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
+;(use-package org-roam-server
+;  :straight t
+;  :config
+;  (general-define-key
+;   "C-c n s" #'org-roam-server-mode)
+;  (setq org-roam-server-host "127.0.0.1"
+;        org-roam-server-port 8081
+;        org-roam-server-authenticate nil
+;        org-roam-server-export-inline-images t
+;        org-roam-server-serve-files nil
+;        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+;        org-roam-server-network-poll t
+;        org-roam-server-network-arrows nil
+;        org-roam-server-network-label-truncate t
+;        org-roam-server-network-label-truncate-length 60
+;        org-roam-server-network-label-wrap-length 20))
 
 
 ;;on hold : until you get the hang of things
