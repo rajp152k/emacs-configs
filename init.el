@@ -186,6 +186,9 @@
    "M-S-<right>" #'eyebrowse-next-window-config)
   (eyebrowse-mode t))
 
+					;buffer managment
+(general-define-key "C-c i" #'ibuffer)
+
 					;ACE-JUMP
 
 (use-package ace-jump-mode
