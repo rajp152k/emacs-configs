@@ -123,11 +123,13 @@
 					;AESTHETICS
 
 (use-package doom-themes
-  :straight t
-  :config
-  (load-theme 'doom-nord))
+  :straight t)
 (use-package darkroom
   :straight t)
+(use-package nimbus-theme
+  :straight t
+  :config
+  (load-theme 'nimbus t))
 
 					;MODELINE AND ICONS
 
