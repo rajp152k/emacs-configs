@@ -123,11 +123,13 @@
 					;AESTHETICS
 
 (use-package doom-themes
-  :straight t
-  :config
-  (load-theme 'doom-nord))
+  :straight t)
 (use-package darkroom
   :straight t)
+(use-package nimbus-theme
+  :straight t
+  :config
+  (load-theme 'nimbus t))
 
 					;MODELINE AND ICONS
 (global-prettify-symbols-mode)
@@ -482,9 +484,12 @@
 (use-package racket-mode
   :straight t
   :config
-  (general-add-hook 'racket-mode-hook
-	  	  (list 'rainbow-delimiters-mode
-			'racket-run)))
+  (setq racket-documentation-search-location 'local
+	racket-images-inline t
+	racket-pretty-print t)
+  (general-add-hook (list 'racket-mode-hook 'racket-repl-mode-hook)
+	  	    (list #'racket-unicode-input-method-enable
+			  #'rainbow-delimiters-mode)))
 
 
 					;ELISP
