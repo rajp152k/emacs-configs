@@ -487,15 +487,20 @@
 
 					; remote ops
 
+(defun remote-shell-specifics ()
+  (when (and (fboundp 'company-mode)
+	     (file-remote-p default-directory))
+    (company-mode -1)))
+(general-add-hook 'shell-mode-hook #'remote-shell-specifics)
+
 (use-package tramp
   :straight t
   :config
-
   (setq tramp-default-method "ssh"
 	vc-ignore-dir-regexp (format "%s\\|%s"
 				     vc-ignore-dir-regexp
 				     tramp-file-name-regexp)
-	tramp-verbose 6)
+	tramp-verbose 4)
 
   (defun gpu_dgx_50.93 ()
     "ssh into the .50.93 DGX station"
@@ -503,14 +508,12 @@
     (add-to-list 'tramp-remote-path "/raid/cs18btech11039/anaconda3/bin")
     (find-file "/ssh:cs18btech11039@192.168.50.93:/home/cs18btech11039"))
 
-  ;;remote python lsp tramp
+  ;;Remote python lsp tramp
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-tramp-connection "pyls")
+   (make-lsp-client :new-connection (lsp-tramp-connection "pylsp")
 		    :major-modes '(python-mode)
 		    :remote? t
-		    :server-id 'pyls-remote))
-
-
+		    :server-id 'pylsp-remote))
   (general-define-key
    "C-c C-r C-a" #'gpu_dgx_50.93))
 
