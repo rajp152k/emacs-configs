@@ -485,11 +485,9 @@
   :straight t
   :config
   (setq racket-documentation-search-location 'local
-	racket-images-inline t
-	racket-pretty-print t)
+	racket-images-inline t)
   (general-add-hook (list 'racket-mode-hook 'racket-repl-mode-hook)
-	  	    (list #'racket-unicode-input-method-enable
-			  #'rainbow-delimiters-mode)))
+			  (list #'rainbow-delimiters-mode)))
 
 
 					;ELISP
