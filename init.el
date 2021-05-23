@@ -38,7 +38,7 @@
 (use-package general
   :straight t
   :config
-  (general-unbind "C-M-n" ; free up for org-roam *Notes*
+  (general-unbind "C-M-o" ; free up for org-roam *Notes*
     ))
 
 
