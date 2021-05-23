@@ -371,13 +371,15 @@
   (setq org-roam-file-extensions '("org"))
   (org-roam-setup)
   (general-define-key
-   :prefix "C-M-n"
+   :prefix "C-M-o"
    "f" #'org-roam-node-find
    "i" #'org-roam-node-insert
    "c" #'org-roam-capture
    "d s" #'org-roam-db-sync
    "t a" #'org-roam-tag-add
-   "o" #'org-open-at-point-global
+   "o a" #'orb-note-actions
+   "b" #'helm-bibtex
+   "o i" #'orb-insert-link
    "t d" #'org-roam-tag-remove
    "r" #'org-roam-buffer-toggle)
   (add-to-list 'display-buffer-alist
