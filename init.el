@@ -575,14 +575,23 @@
     (add-to-list 'tramp-remote-path "/raid/cs18btech11039/anaconda3/bin")
     (find-file "/ssh:cs18btech11039@192.168.50.93:/home/cs18btech11039"))
 
+  (defun gpu_v100_209.54 ()
+    "ssh into the .209.54 v100 device"
+    (interactive)
+    (add-to-list 'tramp-remote-path "/home/cs18btech11039/miniconda3/bin")
+    (find-file "/ssh:cs18btech11039@192.168.209.54:/home/cs18btech11039")
+    )
+
   ;;Remote python lsp tramp
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-tramp-connection "pylsp")
+   (make-lsp-client :new-connection (lsp-tramp-connection "pyls")
 		    :major-modes '(python-mode)
 		    :remote? t
-		    :server-id 'pylsp-remote))
+		    :server-id 'pyls-remote))
   (general-define-key
-   "C-c C-r C-a" #'gpu_dgx_50.93))
+   :prefix "C-c C-r"
+   "C-b" #'gpu_v100_209.54
+   "C-a" #'gpu_dgx_50.93))
 
 					;LISP ADD ONS
 
