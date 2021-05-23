@@ -398,13 +398,66 @@
 
 
 ;;on hold : until you get the hang of things
-;;(use-package org-roam-bibtex
-;;  :straight t 
-;;  :after org-roam
-;;  :hook (org-roam-mode . org-roam-bibtex-mode)
-;;  :config
-;;  (general-add-hook 'org-roam-mode 'org-roam-bibtex-mode)
-;;  (require 'org-ref)) ; optional: if Org Ref is not loaded anywhere else, load it here
+
+					;Research-workflow
+(setq zot_bib (file-truename "~/links/source/org/org-roam/zotero/My Library.bib"))
+
+(use-package helm-bibtex
+  :straight t
+  :config
+  (setq
+   bibtex-completion-notes-path org-roam-directory
+   bibtex-completion-bibliography zot_bib
+   bibtex-completion-pdf-field "file"
+   bibtex-completion-notes-template-multiple-files
+   (concat
+    "#+TITLE: ${title}\n"
+    "#+ROAM_KEY: cite:${=key=}\n"
+    "* TODO Notes\n"
+    ":PROPERTIES:\n"
+    ":Custom_ID: ${=key=}\n"
+    ":NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n"
+    ":AUTHOR: ${author-abbrev}\n"
+    ":JOURNAL: ${journaltitle}\n"
+    ":DATE: ${date}\n"
+    ":YEAR: ${year}\n"
+    ":DOI: ${doi}\n"
+    ":URL: ${url}\n"
+    ":END:\n\n"
+    )))
+
+(use-package org-ref
+  :straight t
+  :config
+  (setq
+   org-ref-completion-library 'org-ref-ivy-cite
+   org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex
+   org-ref-default-bibliography (list zot_bib)
+   org-ref-bibliography-notes (concat org-roam-directory "bibnotes.org")
+   org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
+   org-ref-notes-directory org-roam-directory
+   org-ref-notes-function 'orb-edit-notes
+   ))
+
+(use-package org-roam-bibtex
+  :straight t 
+  :after org-roam
+  :config
+  (general-add-hook org-roam-mode #'org-roam-bibtex-mode)
+  (setq org-roam-bibtex-preformat-keywords
+	'("=key=" "title" "url" "file" "author-or-editor" "keywords" ))
+  (setq orb-templates
+        '(("r" "ref" plain (function org-roam-capture--get-point)
+           ""
+           :file-name "${slug}"
+           :head "#+TITLE: ${=key=}: ${title}\n#+ROAM_KEY: ${ref}
+
+- tags ::
+- keywords :: ${keywords}
+
+\n* ${title}\n  :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :URL: ${url}\n  :AUTHOR: ${author-or-editor}\n  :NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n  :NOTER_PAGE: \n  :END:\n\n"
+
+           :unnarrowed t))))
 
 					;COMPANY
 
