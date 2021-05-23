@@ -452,10 +452,14 @@
    ))
 
 (use-package org-roam-bibtex
-  :straight t 
+  :straight '(org-roam-bibtex
+	      :type git
+	      :host github
+	      :repo "org-roam/org-roam-bibtex"
+	      :branch "org-roam-v2") 
   :after org-roam
   :config
-  (general-add-hook org-roam-mode #'org-roam-bibtex-mode)
+  (general-add-hook 'org-roam-mode #'org-roam-bibtex-mode)
   (setq org-roam-bibtex-preformat-keywords
 	'("=key=" "title" "url" "file" "author-or-editor" "keywords" ))
   (setq orb-templates
