@@ -266,6 +266,18 @@
   :config
   (pdf-loader-install))
 
+;hold
+;(use-package org-noter
+;  :after (:any org pdf-view)
+;  :straight t
+;  :config
+;  (setq
+;   org-noter-always-create-frame nil
+;   org-noter-notes-window-location 'other-buffer
+;   org-noter-hide-other nil
+;   org-noter-notes-search-path (list org-roam-directory)))
+   
+
 					;MAGIT
 
 (use-package magit :straight t)
