@@ -253,7 +253,8 @@
   (general-define-key "C-h C-k" #'which-key-show-top-level)
   (which-key-setup-side-window-bottom))
 
-;;browsing
+					;BROWSING
+
 (setq browse-url-browser-function 'eww-browse-url)
 (setq shr-max-image-proportion 0.6)
 (general-define-key
