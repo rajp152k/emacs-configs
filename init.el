@@ -38,7 +38,7 @@
 (use-package general
   :straight t
   :config
-  (general-unbind "C-M-n" ; free up for org-roam *Notes*
+  (general-unbind "C-M-o" ; free up for org-roam *Notes*
     ))
 
 
@@ -267,6 +267,18 @@
   :config
   (pdf-loader-install))
 
+;hold
+;(use-package org-noter
+;  :after (:any org pdf-view)
+;  :straight t
+;  :config
+;  (setq
+;   org-noter-always-create-frame nil
+;   org-noter-notes-window-location 'other-buffer
+;   org-noter-hide-other nil
+;   org-noter-notes-search-path (list org-roam-directory)))
+   
+
 					;MAGIT
 
 (use-package magit :straight t)
@@ -360,13 +372,15 @@
   (setq org-roam-file-extensions '("org"))
   (org-roam-setup)
   (general-define-key
-   :prefix "C-M-n"
+   :prefix "C-M-o"
    "f" #'org-roam-node-find
    "i" #'org-roam-node-insert
    "c" #'org-roam-capture
    "d s" #'org-roam-db-sync
    "t a" #'org-roam-tag-add
-   "o" #'org-open-at-point-global
+   "o a" #'orb-note-actions
+   "b" #'helm-bibtex
+   "o i" #'orb-insert-link
    "t d" #'org-roam-tag-remove
    "r" #'org-roam-buffer-toggle)
   (add-to-list 'display-buffer-alist
@@ -398,14 +412,69 @@
 ;        org-roam-server-network-label-wrap-length 20))
 
 
-;;on hold : until you get the hang of things
-;;(use-package org-roam-bibtex
-;;  :straight t 
-;;  :after org-roam
-;;  :hook (org-roam-mode . org-roam-bibtex-mode)
-;;  :config
-;;  (general-add-hook 'org-roam-mode 'org-roam-bibtex-mode)
-;;  (require 'org-ref)) ; optional: if Org Ref is not loaded anywhere else, load it here
+					;Research-workflow
+(setq zot_bib (file-truename "~/links/source/org/org-roam/zotero/My Library.bib"))
+
+(use-package helm-bibtex
+  :straight t
+  :config
+  (setq
+   bibtex-completion-notes-path org-roam-directory
+   bibtex-completion-bibliography zot_bib
+   bibtex-completion-pdf-field "file"
+   bibtex-completion-notes-template-multiple-files
+   (concat
+    "#+TITLE: ${title}\n"
+    "#+ROAM_KEY: cite:${=key=}\n"
+    "* TODO Notes\n"
+    ":PROPERTIES:\n"
+    ":Custom_ID: ${=key=}\n"
+    ":NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n"
+    ":AUTHOR: ${author-abbrev}\n"
+    ":JOURNAL: ${journaltitle}\n"
+    ":DATE: ${date}\n"
+    ":YEAR: ${year}\n"
+    ":DOI: ${doi}\n"
+    ":URL: ${url}\n"
+    ":END:\n\n"
+    )))
+
+(use-package org-ref
+  :straight t
+  :config
+  (setq
+   org-ref-completion-library 'org-ref-ivy-cite
+   org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex
+   org-ref-default-bibliography (list zot_bib)
+   org-ref-bibliography-notes (concat org-roam-directory "bibnotes.org")
+   org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
+   org-ref-notes-directory org-roam-directory
+   org-ref-notes-function 'orb-edit-notes
+   ))
+
+(use-package org-roam-bibtex
+  :straight '(org-roam-bibtex
+	      :type git
+	      :host github
+	      :repo "org-roam/org-roam-bibtex"
+	      :branch "org-roam-v2") 
+  :after org-roam
+  :config
+  (general-add-hook 'org-roam-mode #'org-roam-bibtex-mode)
+  (setq org-roam-bibtex-preformat-keywords
+	'("=key=" "title" "url" "file" "author-or-editor" "keywords" ))
+  (setq orb-templates
+        '(("r" "ref" plain (function org-roam-capture--get-point)
+           ""
+           :file-name "${slug}"
+           :head "#+TITLE: ${=key=}: ${title}\n#+ROAM_KEY: ${ref}
+
+- tags ::
+- keywords :: ${keywords}
+
+\n* ${title}\n  :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :URL: ${url}\n  :AUTHOR: ${author-or-editor}\n  :NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n  :NOTER_PAGE: \n  :END:\n\n"
+
+           :unnarrowed t))))
 
 					;COMPANY
 
