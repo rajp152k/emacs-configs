@@ -411,8 +411,6 @@
 ;        org-roam-server-network-label-wrap-length 20))
 
 
-;;on hold : until you get the hang of things
-
 					;Research-workflow
 (setq zot_bib (file-truename "~/links/source/org/org-roam/zotero/My Library.bib"))
 
