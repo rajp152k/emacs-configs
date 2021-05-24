@@ -38,7 +38,9 @@
 (use-package general
   :straight t
   :config
-  (general-unbind "C-M-o" ; free up for org-roam *Notes*
+  (general-unbind
+    "C-M-o" ; free up for org-roam *Notes*
+    "C-M-r" ; free up for remote ops))
     ))
 
 
@@ -382,7 +384,9 @@
    "b" #'helm-bibtex
    "o i" #'orb-insert-link
    "t d" #'org-roam-tag-remove
-   "r" #'org-roam-buffer-toggle)
+   "r" #'org-roam-buffer-toggle
+   "a a" #'org-roam-alias-add
+   "a d" #'org-roam-alias-remove)
   (add-to-list 'display-buffer-alist
 	       '(; org-roam buffer toggle config
 		 (".org-roam.*"
@@ -589,9 +593,9 @@
 		    :remote? t
 		    :server-id 'pyls-remote))
   (general-define-key
-   :prefix "C-c C-r"
-   "C-b" #'gpu_v100_209.54
-   "C-a" #'gpu_dgx_50.93))
+   :prefix "C-M-r"
+   "b" #'gpu_v100_209.54
+   "a" #'gpu_dgx_50.93))
 
 					;LISP ADD ONS
 
@@ -665,7 +669,7 @@
  '(helm-minibuffer-history-key "M-p")
  '(lsp-ui-doc-position 'at-point)
  '(org-agenda-files
-   '("/mnt/c/Users/Raj Patil/source/org/gtd/GTD_base.org" "/mnt/c/Users/Raj Patil/source/org/gtd/GTD_HQ.org" "/mnt/c/Users/Raj Patil/source/org/gtd/events.org"))
+   '("/mnt/c/Users/Raj Patil/source/org/gtd/GTD_base.org" "/mnt/c/Users/Raj Patil/source/org/gtd/GTD_HQ.org"))
  '(warning-suppress-types '((comp))))
    
 (custom-set-faces
