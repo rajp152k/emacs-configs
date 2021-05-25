@@ -281,16 +281,14 @@
   :config
   (pdf-loader-install))
 
-;hold
-;(use-package org-noter
-;  :after (:any org pdf-view)
-;  :straight t
-;  :config
-;  (setq
-;   org-noter-always-create-frame nil
-;   org-noter-notes-window-location 'other-buffer
-;   org-noter-hide-other nil
-;   org-noter-notes-search-path (list org-roam-directory)))
+(use-package org-noter
+  :straight t
+  :config
+  (setq
+   org-noter-always-create-frame nil
+   org-noter-notes-window-location 'other-buffer
+   org-noter-hide-other nil
+   org-noter-notes-search-path (list zot_store org-roam-directory)))
    
 
 					;MAGIT
@@ -429,7 +427,8 @@
 
 
 					;Research-workflow
-(setq zot_bib (file-truename "~/links/source/org/org-roam/zotero/My Library.bib"))
+(setq zot_bib (file-truename "~/links/source/org/org-roam/zotero/My Library.bib")
+      zot_store (file-truename "~/Zotero/storage"))
 
 (use-package helm-bibtex
   :straight t
