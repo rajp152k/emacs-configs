@@ -396,7 +396,8 @@
    "t d" #'org-roam-tag-remove
    "r" #'org-roam-buffer-toggle
    "a a" #'org-roam-alias-add
-   "a d" #'org-roam-alias-remove)
+   "a d" #'org-roam-alias-remove
+   "n o" #'org-noter)
   (add-to-list 'display-buffer-alist
 	       '(; org-roam buffer toggle config
 		 (".org-roam.*"
