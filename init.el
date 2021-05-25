@@ -275,7 +275,8 @@
 					;PDF INTEROP
 
 (use-package pdf-tools
-  :straight t
+  :straight (pdf-tools :host github
+		       :repo "vedang/pdf-tools")
   :config
   (pdf-loader-install))
 
