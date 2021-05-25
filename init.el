@@ -139,6 +139,7 @@
   (setq beacon-size 80
 	beacon-blink-when-focused t
 	beacon-blink-when-point-moves-vertically 5
+	beacon-blink-when-window-changes t
 	beacon-color "dark green"
 	beacon-blink-delay 0.2
 	beacon-blink-duration 0.2))
