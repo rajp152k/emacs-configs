@@ -273,6 +273,7 @@
 (setq browse-url-browser-function 'eww-browse-url)
 (setq shr-max-image-proportion 0.6)
 (general-define-key
+ "C-c C-e C-c" #'eww-copy-page-url
  "C-c t" #'toggle-truncate-lines)
 
 					;PDF INTEROP
@@ -421,7 +422,7 @@
 
 
 					;Research-workflow
-(setq zot_bib (file-truename "~/links/source/org/org-roam/zotero/My Library.bib")
+(setq zot_bib (file-truename "~/Zotero/My Library.bib")
       zot_store (file-truename "~/Zotero/storage"))
 
 (use-package helm-bibtex
