@@ -283,15 +283,6 @@
   :config
   (pdf-loader-install))
 
-(use-package org-noter
-  :straight t
-  :config
-  (setq
-   org-noter-always-create-frame nil
-   org-noter-notes-window-location 'other-buffer
-   org-noter-hide-other nil
-   org-noter-notes-search-path (list zot_store org-roam-directory)))
-   
 
 					;MAGIT
 
@@ -494,6 +485,15 @@
 
            :unnarrowed t))))
 
+(use-package org-noter
+  :straight t
+  :config
+  (setq
+   org-noter-always-create-frame nil
+   org-noter-notes-window-location 'other-buffer
+   org-noter-hide-other nil
+   org-noter-notes-search-path (list zot_store org-roam-directory)))
+   
 					;COMPANY
 
 (use-package company
