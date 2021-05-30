@@ -134,15 +134,16 @@
   (load-theme 'nimbus t))
 (use-package beacon
   :straight t
-  :config
-  (beacon-mode 1)
-  (setq beacon-size 80
+  :init
+  (setq beacon-size 40
 	beacon-blink-when-focused t
 	beacon-blink-when-point-moves-vertically 5
 	beacon-blink-when-window-changes t
-	beacon-color "dark green"
-	beacon-blink-delay 0.2
-	beacon-blink-duration 0.2))
+	beacon-color "#4444bb"
+	beacon-blink-delay 0.1
+	beacon-blink-duration 0.1)
+  :config
+  (beacon-mode 1))
 
 
 
