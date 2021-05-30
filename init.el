@@ -230,15 +230,16 @@
 (general-define-key
  :prefix "C-c"
  "e" #'edit-init)
+					;Window management
 
-					;Winner mode
-(use-package winner
+(use-package window-purpose
   :straight t
-  :config
-  (winner-mode 1)
-  (general-define-key
-   "<C-M-left>" #'winner-undo
-   "<C-M-right>" #'winner-redo))
+  :config)
+  ;(add-to-list 'purpose-user-mode-purposes '(<major-mode> . <purpose>))
+  ;(add-to-list 'purpose-user-name-purposes '(<name> . <purpose>))
+  ;(add-to-list 'purpose-user-regexp-purposes '(<pattern> . <purpose>))
+  ;(purpose-compile-user-configuration))
+  ;(purpose-mode 1))
 
 					;Tabs
 (use-package eyebrowse
