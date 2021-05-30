@@ -664,8 +664,10 @@
 (use-package markdown-mode
   :straight t
   :config 
+  (set-fill-column 60)
   (general-add-hook 'markdown-mode-hook
-		  (list 'nlinum-relative-mode)))
+		    (list 'nlinum-relative-mode
+			  'auto-fill-mode)))
 
 					;MAIL
 
