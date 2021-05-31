@@ -270,7 +270,10 @@
   ;(add-to-list 'purpose-user-regexp-purposes '(<pattern> . <purpose>))
   ;(purpose-compile-user-configuration))
   ;(purpose-mode 1))
-  (purpose-compile-user-configuration))
+  (purpose-compile-user-configuration)
+  (general-define-key
+   :prefix "C-c ,"
+   "s" #'purpose-set-window-purpose))
 
 					;Tabs
 (use-package eyebrowse
