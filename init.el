@@ -159,6 +159,7 @@
 		    buf-move-up
 		    buf-move-down
 		    window-number-select
+		    ace-jump-do
 		    select-window
 		    select-window-1
 		    select-window-2
@@ -290,7 +291,7 @@
   :straight t
   :config
   (general-define-key
-   "C-M-j" 'ace-jump-mode))
+   "C-M-j" 'ace-jump-char-mode))
 
 
 					;WHICH-KEY
