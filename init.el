@@ -107,7 +107,7 @@
   (general-define-key
    "M-x" #'helm-M-x
    "C-h a" #'helm-apropos
-   "M-o" #'helm-occur
+   "C-/" #'helm-occur
    "C-x C-f" #'helm-find-files)
   (helm-mode 1))
 
