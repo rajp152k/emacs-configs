@@ -135,13 +135,13 @@
 (use-package beacon
   :straight t
   :init
-  (setq beacon-size 40
+  (setq beacon-size 60 
 	beacon-blink-when-focused t
 	beacon-blink-when-point-moves-vertically 5
 	beacon-blink-when-window-changes t
 	beacon-color "#4444bb"
-	beacon-blink-delay 0.1
-	beacon-blink-duration 0.1)
+	beacon-blink-delay 0.2
+	beacon-blink-duration 0.2)
   :config
   (beacon-mode 1))
 
