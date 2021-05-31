@@ -111,6 +111,23 @@
    "C-x C-f" #'helm-find-files)
   (helm-mode 1))
 
+					;PROJECTILE
+(use-package projectile
+  :init
+  :straight t
+  :config
+  (projectile-mode 1)
+  (use-package helm-projectile
+    :straight t
+    :config
+    (general-define-key
+     :prefix "C-c p"
+     "f f" #'helm-projectile-find-file
+     "f d" #'helm-projectile-find-dir
+     "a" #'helm-projectile-ack
+     "" #'helm-projectile-)))
+
+
 					;FILE MANAGEMENT : DIRED-X
 
 (setq find-file-visit-truename t)
