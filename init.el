@@ -264,12 +264,13 @@
 
 (use-package window-purpose
   :straight t
-  :config)
+  :config
   ;(add-to-list 'purpose-user-mode-purposes '(<major-mode> . <purpose>))
   ;(add-to-list 'purpose-user-name-purposes '(<name> . <purpose>))
   ;(add-to-list 'purpose-user-regexp-purposes '(<pattern> . <purpose>))
   ;(purpose-compile-user-configuration))
   ;(purpose-mode 1))
+  (purpose-compile-user-configuration))
 
 					;Tabs
 (use-package eyebrowse
