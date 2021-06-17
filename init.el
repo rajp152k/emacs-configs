@@ -10,9 +10,11 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-					;CL WARNINGS
+					;ERROR handling
 
 (setq byte-compile-warnings '(cl-functions))
+(setq visible-bell t)
+
 
 					;BOOTSTRAPPING STRAIGHT.EL
 
@@ -41,6 +43,7 @@
   (general-unbind
     "C-M-o" ; free up for org-roam *Notes*
     "C-M-r" ; free up for remote ops))
+    "C-s" ; for super bindings
     ))
 
 
@@ -124,8 +127,7 @@
      :prefix "C-c p"
      "f f" #'helm-projectile-find-file
      "f d" #'helm-projectile-find-dir
-     "a" #'helm-projectile-ack
-     "" #'helm-projectile-)))
+     "a" #'helm-projectile-ack)))
 
 
 					;FILE MANAGEMENT : DIRED-X
@@ -176,7 +178,8 @@
 		    buf-move-up
 		    buf-move-down
 		    window-number-select
-		    ace-jump-do
+		    ace-jump-char-mode
+		    racket-repl
 		    select-window
 		    select-window-1
 		    select-window-2
@@ -187,6 +190,7 @@
 		    select-window-7
 		    select-window-8
 		    select-window-9)))
+
     (golden-ratio-mode 1))
 
 
@@ -387,7 +391,7 @@
                       (buffer-file-name x)))
                 (buffer-list))))
 
-(setq org-refile-targets '((+org/opened-buffer-files :maxlevel . 3)))
+(setq org-refile-targets '((+org/opened-buffer-files :maxlevel . 5)))
 
 (setq org-capture-templates
       '(("n" "Next Action" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "NA")
@@ -422,8 +426,8 @@
 
 (use-package org-roam
   :straight (org-roam :host github
-		     :repo "org-roam/org-roam"
-		     :branch "v2")
+		      :repo "org-roam/org-roam"
+		      :branch "v2")
   :config
   (setq org-id-method 'ts)
   (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/org-roam/"))
@@ -590,12 +594,13 @@
   (general-add-hook
    'lsp-mode-hook
    (list #'lsp-enable-which-key-integration))
-  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log-error")))
+  (setq lsp-clients-clangd-args '("-j=4" "-background-index")
+	lsp-clients-clangd-executable "clangd"))
 
-;(use-package lsp-pyright
-;  :straight t
-;  :config
-;  (general-add-hook 'python-mode #'(lambda () (lsp)) ))
+					;(use-package lsp-pyright
+					;  :straight t
+					;  :config
+					;  (general-add-hook 'python-mode #'(lambda () (lsp)) ))
 
 (use-package lsp-racket
   :straight '(lsp-racket
@@ -650,19 +655,14 @@
     "ssh into the .209.54 v100 device"
     (interactive)
     (add-to-list 'tramp-remote-path "/home/cs18btech11039/miniconda3/bin")
-    (find-file "/ssh:cs18btech11039@192.168.209.54:/home/cs18btech11039")
-    )
+    (find-file "/ssh:cs18btech11039@192.168.209.54:/home/cs18btech11039"))
 
   ;;Remote python lsp tramp
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-tramp-connection "pyls")
 		    :major-modes '(python-mode)
 		    :remote? t
-		    :server-id 'pyls-remote))
-  (general-define-key
-   :prefix "C-M-r"
-   "b" #'gpu_v100_209.54
-   "a" #'gpu_dgx_50.93))
+		    :server-id 'pyls-remote)))
 
 					;LISP ADD ONS
 
@@ -680,7 +680,7 @@
   (setq racket-documentation-search-location 'local
 	racket-images-inline t)
   (general-add-hook (list 'racket-mode-hook 'racket-repl-mode-hook)
-			  (list #'rainbow-delimiters-mode)))
+		    (list #'rainbow-delimiters-mode)))
 
 
 					;ELISP
@@ -734,8 +734,9 @@
   :config 
   (set-fill-column 60)
   (general-add-hook 'markdown-mode-hook
-		    (list 'nlinum-relative-mode
-			  'auto-fill-mode)))
+		    (list #'nlinum-relative-mode
+			  #'auto-fill-mode
+			  #'flyspell-mode)))
 
 					;MAIL
 
