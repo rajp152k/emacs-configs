@@ -710,6 +710,22 @@
    "d" #'define-word-at-point
    "D" #'define-word))
 
+					;LATEX
+
+;;install auctex from package-list-packages
+;;don't use the github mirror via straight
+(setq TeX-auto-save t
+      TeX-parse-self t
+      TeX-view-program-selection '((output-pdf "PDF Tools"))
+      TeX-source-correlate-start-server t)
+(general-add-hook 'TeX-after-compilation-finished-functions
+		  #'TeX-revert-document-buffer)
+
+(setq-default TeX-master nil)
+(general-add-hook 'Latex-mode-hook
+		  (list #'LaTeX-math-mode
+			#'turn-on-reftex
+			#'flyspell-mode))
 
 					;MARKDOWN
 
