@@ -13,7 +13,7 @@
 					;ERROR handling
 
 (setq byte-compile-warnings '(cl-functions))
-(setq visible-bell t)
+;;(setq visible-bell nil)
 
 
 					;BOOTSTRAPPING STRAIGHT.EL
