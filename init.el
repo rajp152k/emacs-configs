@@ -354,7 +354,8 @@
    :prefix "C-c"
    "l" #'org-store-link
    "a" #'org-agenda
-   "c" #'org-capture)
+   "c" #'org-capture
+   "!" #'org-time-stamp)
   (setq org-directory (file-truename "~/links/source/org")
 	org-default-notes-file (concat org-directory "/gtd/GTD_HQ.org")
 	org-startup-with-inline-images t
