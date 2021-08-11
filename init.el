@@ -439,6 +439,9 @@
    "f" #'org-roam-node-find
    "i" #'org-roam-node-insert
    "c" #'org-roam-capture
+   "h" #'(lambda ()
+	   (interactive)
+	   (find-file (concat org-roam-directory "Index.org")))
    "d s" #'org-roam-db-sync
    "t a" #'org-roam-tag-add
    "o a" #'orb-note-actions
