@@ -378,8 +378,8 @@
 					;ORG-BABEL
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((python . t)
-   (mermaid . t)))
+ '((python . t)))
+   ;(mermaid . t)))
 
 ;(use-package ob-mermaid
 ;  :straight t
