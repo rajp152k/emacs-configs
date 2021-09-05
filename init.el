@@ -365,7 +365,7 @@
 			  #'nlinum-relative-mode))
   (defun update-org-latex-fragments ()
     (org-latex-preview '(64))
-    (plist-put org-format-latex-options :scale (* 1.5 text-scale-mode-amount))
+    (plist-put org-format-latex-options :scale (* 2 text-scale-mode-amount))
     (org-latex-preview '(16)))
   (general-add-hook 'text-scale-mode-hook
 		    (list #'update-org-latex-fragments))
