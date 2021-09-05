@@ -375,6 +375,16 @@
    :prefix "C-c"
    "r" #'org-refile
    "C-x C-g" #'org-clock-goto))
+					;ORG-BABEL
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (mermaid . t)))
+
+;(use-package ob-mermaid
+;  :straight t
+;  :config
+;  (setq ob-mermaid-cli-path "/home/rajp152k/node_modules/.bin/"))
 
 (use-package org-bullets
   :straight t
@@ -601,10 +611,10 @@
   (setq lsp-clients-clangd-args '("-j=4" "-background-index")
 	lsp-clients-clangd-executable "clangd"))
 
-					;(use-package lsp-pyright
-					;  :straight t
-					;  :config
-					;  (general-add-hook 'python-mode #'(lambda () (lsp)) ))
+;(use-package lsp-pyright
+;  :straight t
+;  :config
+;  (general-add-hook 'python-mode #'(lambda () (lsp)) ))
 
 (use-package lsp-racket
   :straight '(lsp-racket
