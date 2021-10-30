@@ -191,7 +191,7 @@
 		    select-window-8
 		    select-window-9)))
 
-    (golden-ratio-mode 1))
+    (golden-ratio-mode 0))
 
 
 
@@ -362,6 +362,7 @@
 	org-startup-truncated nil)
   (general-add-hook 'org-mode-hook
 		    (list #'toggle-word-wrap
+			  #'flyspell-mode
 			  #'nlinum-relative-mode))
   (defun update-org-latex-fragments ()
     (org-latex-preview '(64))
@@ -369,6 +370,7 @@
     (org-latex-preview '(16)))
   (general-add-hook 'text-scale-mode-hook
 		    (list #'update-org-latex-fragments))
+  (setq org-latex-packages-alist '(("margin=2cm" "geometry")))
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
   (general-define-key
@@ -381,10 +383,12 @@
  '((python . t)))
    ;(mermaid . t)))
 
+(setq org-babel-python-command "/home/rajp152k/miniconda3/bin/python")
+
 ;(use-package ob-mermaid
 ;  :straight t
 ;  :config
-;  (setq ob-mermaid-cli-path "/home/rajp152k/node_modules/.bin/"))
+;  (setq ob-mermaid-cli-path "/home/rajp152k/node_modules/.bin/mmdc"))
 
 (use-package org-bullets
   :straight t
@@ -424,7 +428,8 @@
   (interactive)
   (let ((gtd-dir (concat org-directory "/gtd/GTD_HQ.org")))
     (message (concat "opening GTD workspace @ " gtd-dir))
-    (find-file gtd-dir)))
+    (find-file gtd-dir)
+    (flyspell-mode-off)))
 
 (general-define-key
  :prefix "C-c"
@@ -504,18 +509,16 @@
    bibtex-completion-pdf-field "file"
    bibtex-completion-notes-template-multiple-files
    (concat
+    ":PROPERTIES:\n"
+    ":ID:  %(org-id-get-create)\n"
+    ":ROAM_REFS: cite:${=key=}\n"
+    ":END:\n"
     "#+TITLE: ${title}\n"
-    "#+ROAM_KEY: cite:${=key=}\n"
-    "* TODO Notes\n"
+    "* Notes\n"
     ":PROPERTIES:\n"
     ":Custom_ID: ${=key=}\n"
     ":NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n"
-    ":AUTHOR: ${author-abbrev}\n"
-    ":JOURNAL: ${journaltitle}\n"
-    ":DATE: ${date}\n"
-    ":YEAR: ${year}\n"
     ":DOI: ${doi}\n"
-    ":URL: ${url}\n"
     ":END:\n\n"
     )))
 
@@ -592,6 +595,14 @@
 	company-lsp-async t
 	company-lsp-cache-candidates nil))
 
+					;CONDA
+;(use-package conda
+;  :straight t
+;  :config
+;  (conda-env-initialize-eshell)
+;  (conda-env-autoactivate-mode t)
+;  (custom-set-variables
+;   '(conda-anaconda-home "home/rajp152k/miniconda3")))
 
 					; LSP
 
@@ -608,8 +619,28 @@
   (general-add-hook
    'lsp-mode-hook
    (list #'lsp-enable-which-key-integration))
-  (setq lsp-clients-clangd-args '("-j=4" "-background-index")
+  (setq lsp-clients-clangd-args '("-j=4" "-background-index" )
 	lsp-clients-clangd-executable "clangd"))
+
+;;c++ compile_flags.txt auto place
+
+(defun clangd-lsp-setup ()
+  (interactive)
+  ;;check if database already exists
+  (let* ((dir default-directory)
+	 (include-path-1 "/usr/include/c++/")
+	 (include-path-2 "/usr/include/x86_64-linux-gnu/c++/")
+	 (ver (caddr (directory-files include-path-1)))
+	 (includes-str (concat "-I" (concat include-path-1 ver) "/\n"
+			       "-I" (concat include-path-2 ver) "/\n"))
+	 (compilation-db (concat dir "compile_flags.txt")))
+    (if (file-exists-p compilation-db)
+	(message "compilation database already exists")
+      (progn (message "placing a new compilation database")
+	     (write-region includes-str nil compilation-db)))))
+
+(general-add-hook 'c++-mode-hook
+		  (list#'clangd-lsp-setup))
 
 ;(use-package lsp-pyright
 ;  :straight t
@@ -631,15 +662,14 @@
   :config
   (setq lsp-ui-doc-enable t
 	lsp-ui-doc-use-childframe t
-	lsp-ui-doc-position 'at-point
+	lsp-ui-doc-position 'top
 	lsp-ui-doc-include-signature t
 	lsp-ui-sidline-enable t
 	lsp-ui-flycheck-list-position 'right
 	lsp-ui-flycheck-live-reporting t
 	lsp-ui-peek-enable t
-	lsp-ui-peek-enable t
 	lsp-ui-peek-list-width 60
-	lsp-ui-peek-peek-height 25)
+	lsp-ui-peek-peek-height 40)
   (general-add-hook 'lsp-mode-hook (list 'lsp-ui-mode)))
 
 					; remote ops
@@ -752,9 +782,20 @@
 			  #'auto-fill-mode
 			  #'flyspell-mode)))
 
-					;MAIL
+					;MISC
 
-
+;;(defun calcbf (c n t age)
+;;  "calculate body fat percentage using the Jackson Pollock equation"
+;;  (setq mm_sum  (+ c n t))
+;;  (setq mm_sum_square (* mm_sum mm_sum))
+;;  (setq body_density (+ 1.10938
+;;			(* mm_sum -0.0008267)
+;;			(* mm_sum_square 0.0000016)
+;;			(* age -0.0002574)))
+;;  (
+;;     - (/ 495
+;;	   body_density)
+;;	  450))
 
 ;;self appends
 ;; custom-set-vars
