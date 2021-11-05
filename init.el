@@ -595,14 +595,14 @@
 	company-lsp-async t
 	company-lsp-cache-candidates nil))
 
-					;CONDA
-;(use-package conda
-;  :straight t
-;  :config
-;  (conda-env-initialize-eshell)
-;  (conda-env-autoactivate-mode t)
-;  (custom-set-variables
-;   '(conda-anaconda-home "home/rajp152k/miniconda3")))
+					;PYTHON
+(use-package pyvenv
+  :straight t
+  :config
+  (setenv "WORKON_HOME" "/home/rajp152k/miniconda3/envs/")
+  (pyvenv-mode 1)
+  (pyvenv-workon "/home/rajp152k/miniconda3/envs/emacs/"))
+
 
 					; LSP
 
