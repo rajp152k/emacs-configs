@@ -533,31 +533,31 @@
    org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
    org-ref-notes-directory org-roam-directory
    org-ref-notes-function 'orb-edit-notes
-   ))
+   org-latex-pdf-process (list "%latex -interaction nonstopmode -output-directory %o %f")))
 
-(use-package org-roam-bibtex
-  :straight '(org-roam-bibtex
-	      :type git
-	      :host github
-	      :repo "org-roam/org-roam-bibtex"
-	      :branch "org-roam-v2") 
-  :after org-roam
-  :config
-  (general-add-hook 'org-roam-mode #'org-roam-bibtex-mode)
-  (setq org-roam-bibtex-preformat-keywords
-	'("=key=" "title" "url" "file" "author-or-editor" "keywords" ))
-  (setq orb-templates
-        '(("r" "ref" plain (function org-roam-capture--get-point)
-           ""
-           :file-name "${slug}"
-           :head "#+TITLE: ${=key=}: ${title}\n#+ROAM_KEY: ${ref}
-
-- tags ::
-- keywords :: ${keywords}
-
-\n* ${title}\n  :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :URL: ${url}\n  :AUTHOR: ${author-or-editor}\n  :NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n  :NOTER_PAGE: \n  :END:\n\n"
-
-           :unnarrowed t))))
+;;(use-package org-roam-bibtex
+;;  :straight '(org-roam-bibtex
+;;	      :type git
+;;	      :host github
+;;	      :repo "org-roam/org-roam-bibtex"
+;;	      :branch "org-roam-v2") 
+;;  :after org-roam
+;;  :config
+;;  (general-add-hook 'org-roam-mode #'org-roam-bibtex-mode)
+;;  (setq org-roam-bibtex-preformat-keywords
+;;	'("=key=" "title" "url" "file" "author-or-editor" "keywords" ))
+;;  (setq orb-templates
+;;        '(("r" "ref" plain (function org-roam-capture--get-point)
+;;           ""
+;;           :file-name "${slug}"
+;;           :head "#+TITLE: ${=key=}: ${title}\n#+ROAM_KEY: ${ref}
+;;
+;;- tags ::
+;;- keywords :: ${keywords}
+;;
+;;\n* ${title}\n  :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :URL: ${url}\n  :AUTHOR: ${author-or-editor}\n  :NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n  :NOTER_PAGE: \n  :END:\n\n"
+;;
+;;           :unnarrowed t))))
 
 (use-package org-noter
   :straight t
@@ -600,8 +600,10 @@
   :straight t
   :config
   (setenv "WORKON_HOME" "/home/rajp152k/miniconda3/envs/")
-  (pyvenv-mode 1)
-  (pyvenv-workon "/home/rajp152k/miniconda3/envs/emacs/"))
+  (pyvenv-mode 1))
+
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython"))
 
 
 					; LSP
@@ -715,6 +717,13 @@
   :config
   (smartparens-global-mode t))
 (use-package rainbow-delimiters :straight t)
+
+					;SLIME
+(use-package slime
+  :straight t
+  :config
+  (setq inferior-lisp-program "sbcl"))
+
 
 					;RACKET
 
