@@ -303,11 +303,11 @@
 (use-package window-purpose
   :straight t
   :config
-  ;(add-to-list 'purpose-user-mode-purposes '(<major-mode> . <purpose>))
-  ;(add-to-list 'purpose-user-name-purposes '(<name> . <purpose>))
-  ;(add-to-list 'purpose-user-regexp-purposes '(<pattern> . <purpose>))
-  ;(purpose-compile-user-configuration))
-  ;(purpose-mode 1))
+;;(add-to-list 'purpose-user-mode-purposes '(<major-mode> . <purpose>))
+;;(add-to-list 'purpose-user-name-purposes '(<name> . <purpose>))
+;;(add-to-list 'purpose-user-regexp-purposes '(<pattern> . <purpose>))
+;;(purpose-compile-user-configuration))
+;;(purpose-mode 1))
   (purpose-compile-user-configuration)
   (general-define-key
    :prefix "C-c ,"
@@ -397,14 +397,14 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)))
-   ;(mermaid . t)))
+;;(mermaid . t)))
 
 (setq org-babel-python-command "/home/rajp152k/miniconda3/bin/python")
 
-;(use-package ob-mermaid
-;  :straight t
-;  :config
-;  (setq ob-mermaid-cli-path "/home/rajp152k/node_modules/.bin/mmdc"))
+;;(use-package ob-mermaid
+;;  :straight t
+;;  :config
+;;  (setq ob-mermaid-cli-path "/home/rajp152k/node_modules/.bin/mmdc"))
 
 (use-package org-bullets
   :straight t
@@ -660,10 +660,10 @@
 (general-add-hook 'c++-mode-hook
 		  (list#'clangd-lsp-setup))
 
-;(use-package lsp-pyright
-;  :straight t
-;  :config
-;  (general-add-hook 'python-mode #'(lambda () (lsp)) ))
+;;(use-package lsp-pyright
+;;  :straight t
+;;  :config
+;;  (general-add-hook 'python-mode #'(lambda () (lsp)) ))
 
 (use-package lsp-racket
   :straight '(lsp-racket
