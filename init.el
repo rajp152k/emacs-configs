@@ -61,6 +61,22 @@
    dashboard-startup-banner 'logo
    ))
 
+					;UTITLITIES
+;;toggle background to white when for reading text in the dark
+(defun toggle-background ()
+  (interactive)
+  (defvar background-state 0)
+  (defvar last-background nil)
+  (cond ( (= background-state 0) (progn
+				   (setq last-background (background-color-at-point))
+				   (set-background-color "#ffffff")
+				   (setq background-state 1)))
+	( t (progn
+	      (set-background-color last-background)
+	      (setq background-state 0)))))
+
+(general-define-key "C-c C-t C-b" #'toggle-background)
+
 					;EVIL ENV
 
 (use-package evil
