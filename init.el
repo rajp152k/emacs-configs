@@ -607,7 +607,8 @@
   :straight t
   :config
   (setenv "WORKON_HOME" "/home/rajp152k/miniconda3/envs/")
-  (pyvenv-mode 1))
+  (pyvenv-mode 1)
+  (pyvenv-workon "emacs"))
 
 (when (executable-find "ipython")
   (setq python-shell-interpreter "ipython"))
@@ -792,7 +793,7 @@
 (use-package markdown-mode
   :straight t
   :config 
-  (set-fill-column 60)
+  (set-fill-column 50)
   (general-add-hook 'markdown-mode-hook
 		    (list #'nlinum-relative-mode
 			  #'auto-fill-mode
