@@ -62,14 +62,16 @@
    ))
 
 					;UTITLITIES
-;;toggle background to white when for reading text in the dark
+;;toggle background to a specified hex
 (defun toggle-background ()
   (interactive)
   (defvar background-state 0)
   (defvar last-background nil)
+  (defvar default-preference "#ffffff")
   (cond ( (= background-state 0) (progn
 				   (setq last-background (background-color-at-point))
-				   (set-background-color (read-string "background hex?:"))
+				   (set-background-color (let ((choice (read-string "background hex?:")))
+							   (if (string= choice "") default-preference choice)))
 				   (setq background-state 1)))
 	( t (progn
 	      (set-background-color last-background)
@@ -423,7 +425,7 @@
 (setq org-capture-templates
       '(("n" "Next Action" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "NA")
          "* TODO %?\n  %i\n  %a")
-	("e" "Event" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "INQ")
+	("e" "Event" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "Events")
          "* %?\nSCHEDULED: %T\n  %i")
         ("i" "IN" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "INQ")
          "* %?\nEntered on %U\n  %i\n  %a")
@@ -446,6 +448,20 @@
 (general-define-key
  :prefix "C-c"
  "g" #'gtd)
+
+					;TEMPORALLY LOCAL SHORTCUTS
+(defun theExp()
+  "open up the experiment"
+  (interactive)
+  (let ((exp-dir "~/links/source/books/The Experiment/"))
+    (find-file (concat exp-dir "TheExperiment.org"))
+    (message "opened The Experiment")))
+    
+
+(general-define-key
+ :prefix "C-c C-t"
+ "e" #'theExp)
+
 
 
 
@@ -795,20 +811,6 @@
 			  #'auto-fill-mode
 			  #'flyspell-mode)))
 
-					;MISC
-
-;;(defun calcbf (c n t age)
-;;  "calculate body fat percentage using the Jackson Pollock equation"
-;;  (setq mm_sum  (+ c n t))
-;;  (setq mm_sum_square (* mm_sum mm_sum))
-;;  (setq body_density (+ 1.10938
-;;			(* mm_sum -0.0008267)
-;;			(* mm_sum_square 0.0000016)
-;;			(* age -0.0002574)))
-;;  (
-;;     - (/ 495
-;;	   body_density)
-;;	  450))
 
 ;;self appends
 ;; custom-set-vars
