@@ -69,7 +69,7 @@
   (defvar last-background nil)
   (cond ( (= background-state 0) (progn
 				   (setq last-background (background-color-at-point))
-				   (set-background-color "#ffffff")
+				   (set-background-color (read-string "background hex?:"))
 				   (setq background-state 1)))
 	( t (progn
 	      (set-background-color last-background)
@@ -789,7 +789,7 @@
 (use-package markdown-mode
   :straight t
   :config 
-  (set-fill-column 50)
+  (set-fill-column 40)
   (general-add-hook 'markdown-mode-hook
 		    (list #'nlinum-relative-mode
 			  #'auto-fill-mode
