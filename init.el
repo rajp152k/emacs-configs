@@ -43,8 +43,7 @@
   (general-unbind
     "C-M-o" ; free up for org-roam *Notes*
     "C-M-r" ; free up for remote ops))
-    "C-s" ; for super bindings
-    ))
+    "C-s" ; for super bindings))
 
 
 					;DASHBOARD
@@ -182,79 +181,6 @@
   :config
   (beacon-mode 1))
 
-(use-package golden-ratio
-    :straight t
-    :config
-    (setq golden-ratio-extra-commands
-	  (append golden-ratio-extra-commands
-		  '(evil-window-left
-		    evil-window-right
-		    evil-window-up
-		    evil-window-down
-		    buf-move-left
-		    buf-move-right
-		    buf-move-up
-		    buf-move-down
-		    window-number-select
-		    ace-jump-char-mode
-		    racket-repl
-		    select-window
-		    select-window-1
-		    select-window-2
-		    select-window-3
-		    select-window-4
-		    select-window-5
-		    select-window-6
-		    select-window-7
-		    select-window-8
-		    select-window-9)))
-
-    (golden-ratio-mode 0))
-
-
-
-					;PRETTIFY W/ LIGATURES
-
-;;;(global-prettify-symbols-mode 1)
-;;;(general-add-hook
-;;; 'python-mode-hook
-;;; (lambda ()
-;;;   (mapc (lambda (pair) (push pair prettify-symbols-alist))
-;;;         '(;; Syntax
-;;;           ("def" .      #x2131)
-;;;           ("not" .      #x2757)
-;;;           ("in" .       #x2208)
-;;;           ("not in" .   #x2209)
-;;;           ("return" .   #x27fc)
-;;;           ("yield" .    #x27fb)
-;;;           ("for" .      #x2200)
-;;;           ;; Base Types
-;;;           ("int" .      #x2124)
-;;;           ("float" .    #x211d)
-;;;           ("str" .      #x1d54a)
-;;;           ("True" .     #x1d54b)
-;;;           ("False" .    #x1d53d)
-;;;           ;; Mypy
-;;;           ("Dict" .     #x1d507)
-;;;           ("List" .     #x2112)
-;;;           ("Tuple" .    #x2a02)
-;;;           ("Set" .      #x2126)
-;;;           ("Iterable" . #x1d50a)
-;;;           ("Any" .      #x2754)
-;;;           ("Union" .    #x22c3)))))
-;;;
-;;;
-;;;(use-package pretty-mode
-;;;  :straight t
-;;;  :config
-;;;  (global-pretty-mode t)
-;;;  (pretty-deactivate-groups
-;;;   '(:equality :ordering :ordering-double :ordering-triple
-;;;	       :arrows :arrows-twoheaded :punctuation
-;;;	       :logic :sets))
-;;;  (pretty-activate-groups
-;;;   '(:sub-and-superscripts :greek :arithmetic-nary)))
-
 					;MODELINE AND ICONS
 
 (use-package doom-modeline
@@ -296,6 +222,7 @@
 (general-define-key
  :prefix "C-c"
  "e" #'edit-init)
+
 					;Window management
 
 (use-package window-purpose
@@ -319,14 +246,6 @@
 
 					;buffer managment
 (general-define-key "C-c i" #'ibuffer)
-
-					;ACE-JUMP
-
-(use-package ace-jump-mode
-  :straight t
-  :config
-  (general-define-key
-   "C-M-j" 'ace-jump-char-mode))
 
 
 					;WHICH-KEY
@@ -429,11 +348,10 @@
          "* %?\nSCHEDULED: %T\n  %i")
         ("i" "IN" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "INQ")
          "* %?\nEntered on %U\n  %i\n  %a")
+        ("c" "consolidate" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "Consolidate")
+         "* %?\nEntered on %U\n  %i\n  %a")
 	("t" "Tickler" entry (file+headline "~/links/source/org/gtd/GTD_HQ.org" "Tickler")
 	 "* %?\nDEFER THOUGHT TO: %T\n %i"))) 
-
-
-
 
 					;GTD
 
@@ -449,24 +367,7 @@
  :prefix "C-c"
  "g" #'gtd)
 
-					;TEMPORALLY LOCAL SHORTCUTS
-(defun theExp()
-  "open up the experiment"
-  (interactive)
-  (let ((exp-dir "~/links/source/books/The Experiment/"))
-    (find-file (concat exp-dir "TheExperiment.org"))
-    (message "opened The Experiment")))
-    
-
-(general-define-key
- :prefix "C-c C-t"
- "e" #'theExp)
-
-
-
-
 					;ORG-ROAM
-
 
 (use-package org-roam
   :straight (org-roam :host github
@@ -474,7 +375,7 @@
 		      :branch "v2")
   :config
   (setq org-id-method 'ts)
-  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/org-roam/"))
+  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/root1729"))
   (setq org-roam-file-extensions '("org"))
   (org-roam-setup)
   (general-define-key
@@ -494,7 +395,8 @@
    "r" #'org-roam-buffer-toggle
    "a a" #'org-roam-alias-add
    "a d" #'org-roam-alias-remove
-   "n o" #'org-noter)
+   "n o" #'org-noter
+   "s d" #'switch-org-dir)
   (add-to-list 'display-buffer-alist
 	       '(; org-roam buffer toggle config
 		 (".org-roam.*"
@@ -503,90 +405,6 @@
 		  (side . left)
 		  (slot 0)))))
 
-(use-package org-roam-ui
-  :straight t
-  (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
-  :after org-roam
-  :config
-  (setq org-roam-ui-sync-theme t
-	org-roam-ui-follow t
-	org-roam-ui-update-on-save t
-	org-roam-ui-open-on-start-up nil))
-
-
-
-					;Research-workflow
-(setq zot_bib (file-truename "~/Zotero/My Library.bib")
-      zot_store (file-truename "~/Zotero/storage"))
-
-(use-package helm-bibtex
-  :straight t
-  :config
-  (setq
-   bibtex-completion-notes-path org-roam-directory
-   bibtex-completion-bibliography zot_bib
-   bibtex-completion-pdf-field "file"
-   bibtex-completion-notes-template-multiple-files
-   (concat
-    ":PROPERTIES:\n"
-    ":ID:  %(org-id-get-create)\n"
-    ":ROAM_REFS: cite:${=key=}\n"
-    ":END:\n"
-    "#+TITLE: ${title}\n"
-    "* Notes\n"
-    ":PROPERTIES:\n"
-    ":Custom_ID: ${=key=}\n"
-    ":NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n"
-    ":DOI: ${doi}\n"
-    ":END:\n\n"
-    )))
-
-(use-package org-ref
-  :straight t
-  :config
-  (setq
-   org-ref-completion-library 'org-ref-ivy-cite
-   org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex
-   org-ref-default-bibliography (list zot_bib)
-   org-ref-bibliography-notes (concat org-roam-directory "bibnotes.org")
-   org-ref-note-title-format "* TODO %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :NOTER_DOCUMENT: %F\n :ROAM_KEY: cite:%k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :END:\n\n"
-   org-ref-notes-directory org-roam-directory
-   org-ref-notes-function 'orb-edit-notes
-   org-latex-pdf-process (list "%latex -interaction nonstopmode -output-directory %o %f")))
-
-;;(use-package org-roam-bibtex
-;;  :straight '(org-roam-bibtex
-;;	      :type git
-;;	      :host github
-;;	      :repo "org-roam/org-roam-bibtex"
-;;	      :branch "org-roam-v2") 
-;;  :after org-roam
-;;  :config
-;;  (general-add-hook 'org-roam-mode #'org-roam-bibtex-mode)
-;;  (setq org-roam-bibtex-preformat-keywords
-;;	'("=key=" "title" "url" "file" "author-or-editor" "keywords" ))
-;;  (setq orb-templates
-;;        '(("r" "ref" plain (function org-roam-capture--get-point)
-;;           ""
-;;           :file-name "${slug}"
-;;           :head "#+TITLE: ${=key=}: ${title}\n#+ROAM_KEY: ${ref}
-;;
-;;- tags ::
-;;- keywords :: ${keywords}
-;;
-;;\n* ${title}\n  :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :URL: ${url}\n  :AUTHOR: ${author-or-editor}\n  :NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n  :NOTER_PAGE: \n  :END:\n\n"
-;;
-;;           :unnarrowed t))))
-
-(use-package org-noter
-  :straight t
-  :config
-  (setq
-   org-noter-always-create-frame nil
-   org-noter-notes-window-location 'other-buffer
-   org-noter-hide-other nil
-   org-noter-notes-search-path (list zot_store org-roam-directory)))
-   
 					;COMPANY
 
 (use-package company
@@ -702,34 +520,6 @@
     (company-mode -1)))
 (general-add-hook 'shell-mode-hook #'remote-shell-specifics)
 
-(use-package tramp
-  :straight t
-  :config
-  (setq tramp-default-method "ssh"
-	vc-ignore-dir-regexp (format "%s\\|%s"
-				     vc-ignore-dir-regexp
-				     tramp-file-name-regexp)
-	tramp-verbose 4)
-
-  (defun gpu_dgx_50.93 ()
-    "ssh into the .50.93 DGX station"
-    (interactive)
-    (add-to-list 'tramp-remote-path "/raid/cs18btech11039/anaconda3/bin")
-    (find-file "/ssh:cs18btech11039@192.168.50.93:/home/cs18btech11039"))
-
-  (defun gpu_v100_209.54 ()
-    "ssh into the .209.54 v100 device"
-    (interactive)
-    (add-to-list 'tramp-remote-path "/home/cs18btech11039/miniconda3/bin")
-    (find-file "/ssh:cs18btech11039@192.168.209.54:/home/cs18btech11039"))
-
-  ;;Remote python lsp tramp
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-tramp-connection "pyls")
-		    :major-modes '(python-mode)
-		    :remote? t
-		    :server-id 'pyls-remote)))
-
 					;LISP ADD ONS
 
 (use-package smartparens
@@ -767,7 +557,7 @@
 (defun blog ()
   "Open blogging workspace"
   (interactive)
-  (let ((blog-dir "~/links/source/blog/rajp152k.github.io"))
+  (let ((blog-dir "~/links/source/rajpatil.dev"))
     (message (concat "opening blogging workspace @ " blog-dir))
     (find-file blog-dir)))
 
