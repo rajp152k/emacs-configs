@@ -203,7 +203,7 @@
 		    (list #'doom-modeline-mode
 			  #'minions-mode)))
 
-  
+
 (use-package nlinum-relative
   :straight t
   :config
@@ -229,11 +229,11 @@
 (use-package window-purpose
   :straight t
   :config
-;;(add-to-list 'purpose-user-mode-purposes '(<major-mode> . <purpose>))
-;;(add-to-list 'purpose-user-name-purposes '(<name> . <purpose>))
-;;(add-to-list 'purpose-user-regexp-purposes '(<pattern> . <purpose>))
-;;(purpose-compile-user-configuration))
-;;(purpose-mode 1))
+  ;;(add-to-list 'purpose-user-mode-purposes '(<major-mode> . <purpose>))
+  ;;(add-to-list 'purpose-user-name-purposes '(<name> . <purpose>))
+  ;;(add-to-list 'purpose-user-regexp-purposes '(<pattern> . <purpose>))
+  ;;(purpose-compile-user-configuration))
+  ;;(purpose-mode 1))
   (purpose-compile-user-configuration)
   (general-define-key
    :prefix "C-c ,"
@@ -559,9 +559,6 @@
 
 					;BLOG
 
-
-(general-define-key
- "C-c b" 'blog)
 (use-package easy-hugo
   :straight t
   :config
@@ -574,10 +571,22 @@
     (let ((blog-dir "~/links/source/rajpatil.dev"))
       (message (concat "opening blogging workspace @ " blog-dir))
       (find-file blog-dir)))
+  (defun life-hex-count ()
+    "number of days I've been alive"
+    (interactive)
+    (let* ((birth (date-to-time "2000-05-01 19:30 IST"))
+	   (today (date-to-time (format-time-string "%Y-%m-%d %H:%M:%S %Z" (current-time)) ))
+	   (diff (float-time (time-subtract today birth))))
+      (insert (format "#%X" (/ diff 86400)))))
   (general-define-key
-   :prefix "C-c"
-   "b" 'easy-hugo-newpost
-   "C-b" #'blog ) )
+   :prefix "C-c C-h"
+   "b" #'easy-hugo-newpost
+   "C-b" #'blog
+   "t" #'life-hex-count))
+
+
+ 
+
 
 
 					;DICTIONARY
