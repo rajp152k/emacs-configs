@@ -44,6 +44,7 @@
     "C-M-o" ; free up for org-roam *Notes*
     "C-M-r" ; free up for remote ops))
     "C-s" ; for super bindings))
+    ))
 
 
 					;DASHBOARD
@@ -375,7 +376,7 @@
 		      :branch "v2")
   :config
   (setq org-id-method 'ts)
-  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/root1729"))
+  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/journal/"))
   (setq org-roam-file-extensions '("org"))
   (org-roam-setup)
   (general-define-key
@@ -388,15 +389,10 @@
 	   (find-file (concat org-roam-directory "Index.org")))
    "d s" #'org-roam-db-sync
    "t a" #'org-roam-tag-add
-   "o a" #'orb-note-actions
-   "b" #'helm-bibtex
-   "o i" #'orb-insert-link
    "t d" #'org-roam-tag-remove
    "r" #'org-roam-buffer-toggle
    "a a" #'org-roam-alias-add
-   "a d" #'org-roam-alias-remove
-   "n o" #'org-noter
-   "s d" #'switch-org-dir)
+   "a d" #'org-roam-alias-remove)
   (add-to-list 'display-buffer-alist
 	       '(; org-roam buffer toggle config
 		 (".org-roam.*"
@@ -404,6 +400,7 @@
 		  (window-width . 0.25)
 		  (side . left)
 		  (slot 0)))))
+
 
 					;COMPANY
 
@@ -442,6 +439,14 @@
 
 (when (executable-find "ipython")
   (setq python-shell-interpreter "ipython"))
+
+					;YAML
+(use-package yaml-mode
+  :straight t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+
+
 
 
 					; LSP
@@ -554,15 +559,26 @@
 
 					;BLOG
 
-(defun blog ()
-  "Open blogging workspace"
-  (interactive)
-  (let ((blog-dir "~/links/source/rajpatil.dev"))
-    (message (concat "opening blogging workspace @ " blog-dir))
-    (find-file blog-dir)))
 
 (general-define-key
  "C-c b" 'blog)
+(use-package easy-hugo
+  :straight t
+  :config
+  (setq easy-hugo-basedir "/mnt/c/Users/Raj Patil/source/rajpatil.dev/")
+  (setq easy-hugo-url "https://rajpatil.dev")
+  (setq easy-hugo-root "/usr/local/bin")
+  (defun blog ()
+    "Open blogging workspace"
+    (interactive)
+    (let ((blog-dir "~/links/source/rajpatil.dev"))
+      (message (concat "opening blogging workspace @ " blog-dir))
+      (find-file blog-dir)))
+  (general-define-key
+   :prefix "C-c"
+   "b" 'easy-hugo-newpost
+   "C-b" #'blog ) )
+
 
 					;DICTIONARY
 (use-package define-word
