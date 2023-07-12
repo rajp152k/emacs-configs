@@ -376,7 +376,7 @@
 		      :branch "v2")
   :config
   (setq org-id-method 'ts)
-  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/journal/"))
+  (setq org-roam-directory (file-truename "/mnt/c/Users/Raj Patil/source/org/braindump/Content/"))
   (setq org-roam-file-extensions '("org"))
   (org-roam-setup)
   (general-define-key
@@ -386,7 +386,7 @@
    "c" #'org-roam-capture
    "h" #'(lambda ()
 	   (interactive)
-	   (find-file (concat org-roam-directory "Index.org")))
+	   (find-file (concat org-roam-directory "index.org")))
    "d s" #'org-roam-db-sync
    "t a" #'org-roam-tag-add
    "t d" #'org-roam-tag-remove
@@ -531,7 +531,11 @@
   :straight t
   :config
   (smartparens-global-mode t))
-(use-package rainbow-delimiters :straight t)
+
+(use-package rainbow-delimiters
+  :straight t
+  :config
+  (rainbow-delimiters-mode-enable))
 
 					;SLIME
 (use-package slime
@@ -577,7 +581,7 @@
     (let* ((birth (date-to-time "2000-05-01 19:30 IST"))
 	   (today (date-to-time (format-time-string "%Y-%m-%d %H:%M:%S %Z" (current-time)) ))
 	   (diff (float-time (time-subtract today birth))))
-      (insert (format "#%X" (/ diff 86400)))))
+      (insert (format "0x%X" (/ diff 86400)))))
   (general-define-key
    :prefix "C-c C-h"
    "b" #'easy-hugo-newpost
